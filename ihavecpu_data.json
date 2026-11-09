@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "id": "case-1",
+      "name": "NZXT H5 Flow RGB",
+      "zone": "ZONE PREMIUM",
+      "mbType": "ATX, Micro-ATX, Mini-ITX",
+      "dimension": "165 มม.",
+      "weight": "365 มม.",
+      "images": [
+        "https://main.d1a7g76k5o0ymt.amplifyapp.com/_next/image?url=https%3A%2F%2Fpub-d6d63df1a9f9481c933eab45ed01e5c6.r2.dev%2Fproduct-images%2Feabe621d-84ff-4e76-822a-452504ebad3d.webp&w=384&q=75"
+      ],
+      "customFields": {}
+    },
+    {
+      "id": "case-2",
+      "name": "Lian Li O11 Dynamic EVO",
+      "zone": "ZONE PREMIUM",
+      "mbType": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+      "dimension": "167 มม.",
+      "weight": "422 มม.",
+      "images": [
+        "https://main.d1a7g76k5o0ymt.amplifyapp.com/_next/image?url=https%3A%2F%2Fpub-d6d63df1a9f9481c933eab45ed01e5c6.r2.dev%2Fproduct-images%2F6494d0d0-5c94-4d01-a305-3c94204d8a32.webp&w=384&q=75"
+      ],
+      "customFields": {}
+    },
+    {
+      "id": "case-3",
+      "name": "ASUS ROG Hyperion GR701",
+      "zone": "ZONE PREMIUM",
+      "mbType": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+      "dimension": "190 มม.",
+      "weight": "460 มม.",
+      "images": [
+        "https://placehold.co/600x600/1c1c1e/ffffff?text=ROG+Hyperion"
+      ],
+      "customFields": {}
+    },
+    {
+      "id": "case-4",
+      "name": "Montech King 95 Pro",
+      "zone": "ZONE A",
+      "mbType": "ATX, Micro-ATX, Mini-ITX",
+      "dimension": "175 มม.",
+      "weight": "420 มม.",
+      "images": [
+        "https://placehold.co/600x600/e5e5ea/111111?text=Montech+King+95"
+      ],
+      "customFields": {}
+    }
+  ],
+  "fields": [],
+  "header": {
+    "main": "เลือกเคสที่ชอบ ให้คนที่ใช่",
+    "sub": "เลือกเคสเสร็จแล้วแจ้งแอดมินทันที"
+  }
+}
