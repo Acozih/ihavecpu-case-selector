@@ -126,10 +126,9 @@
         <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12 px-1">
             <button onclick="filterZone('ALL')" data-zone="ALL" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation">ทั้งหมด</button>
             <button onclick="filterZone('ZONE D')" data-zone="ZONE D" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE D (10)</button>
-            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (14)</button>
-            <button onclick="filterZone('ZONE A')" data-zone="ZONE A" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (9)</button>
-            <button onclick="filterZone('ZONE B')" data-zone="ZONE B" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (8)</button>
-            <button onclick="filterZone('ZONE PREMIUM')" data-zone="ZONE PREMIUM" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE PREMIUM (9)</button>
+            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (11)</button>
+            <button onclick="filterZone('ZONE A')" data-zone="ZONE A" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (7)</button>
+            <button onclick="filterZone('ZONE B')" data-zone="ZONE B" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (6)</button>
         </div>
 
         <!-- Cases Container (แยกทีละแถว / Section ตาม ZONE) -->
@@ -208,7 +207,6 @@
                             <option value="ZONE C">ZONE C</option>
                             <option value="ZONE A">ZONE A</option>
                             <option value="ZONE B">ZONE B</option>
-                            <option value="ZONE PREMIUM">ZONE PREMIUM</option>
                         </select>
                     </div>
                     <div>
@@ -218,11 +216,11 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">CPU Height</label>
-                    <input type="text" id="caseDimension" required placeholder="เช่น 165 มม." class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-black">
+                    <input type="text" id="caseDimension" required placeholder="เช่น 165 mm" class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">GPU Length</label>
-                    <input type="text" id="caseWeight" required placeholder="เช่น 365 มม." class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-black">
+                    <input type="text" id="caseWeight" required placeholder="เช่น 365 mm" class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-black">
                 </div>
                 <div>
                     <div class="flex justify-between items-center mb-1">
@@ -331,64 +329,46 @@
     <script>
         const initial50CasesData = [
             // ZONE D (10 รายการ)
-            { id: "case-d1", name: "GIGABYTE C103 GLASS AutoRGB (BLACK)", zone: "ZONE D", mbType: "ATX,Micro-ATX,Mini-ITX", dimension: "165 mm", weight: "355 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/38ddef18f93c9646f80555b18cf00055/ProductRemoveBg/47932/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/8c415eb56f62d26bbbb9678c4fb5cfbe/ProductRemoveBg/47934/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/c59679eb76905eb2c73823ebfd6ca4b7/ProductRemoveBg/47933/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/00b8853cc0ab98159883030360987681/ProductRemoveBg/47935/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/75314551c87552491f4fb35d59ee6a48/ProductRemoveBg/47936/webp/670"], customFields: {} },
+            { id: "case-d1", name: "GIGABYTE C103 GLASS AutoRGB (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,Mini-ITX", dimension: "165 mm", weight: "355 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/38ddef18f93c9646f80555b18cf00055/ProductRemoveBg/47932/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/8c415eb56f62d26bbbb9678c4fb5cfbe/ProductRemoveBg/47934/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/c59679eb76905eb2c73823ebfd6ca4b7/ProductRemoveBg/47933/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/00b8853cc0ab98159883030360987681/ProductRemoveBg/47935/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/75314551c87552491f4fb35d59ee6a48/ProductRemoveBg/47936/webp/670"], customFields: {} },
             { id: "case-d2", name: "ID-COOLING WARE 300 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX/ITX", dimension: "160 mm", weight: "320 mm", images: ["https://static.idcooling.com/detail/20260520/%E6%9C%BA%E7%AE%B1Gallery_1546_fwmu5w.png","https://static.idcooling.com/detail/20260625/3_rkv685.jpg","https://static.idcooling.com/detail/20260625/6_qxzk3v.jpg","https://static.idcooling.com/detail/20260625/4_gsr988.jpg","https://static.idcooling.com/detail/20260625/5_jk26ov.jpg"], customFields: {} },
-            { id: "case-d3", name: "iHAVECPU IHC 401TG (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm.", weight: "305 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84798_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84799_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84802_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84801_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84803_800.jpg"], customFields: {} },
-            { id: "case-d4", name: "iHAVECPU IHC 401TG (WHITE)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm.", weight: "305 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84804_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84805_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84808_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84807_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84809_800.jpg"], customFields: {} },
-            { id: "case-d5", name: "iHAVECPU IHC R03 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm.", weight: "330 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74519_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74520_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74521_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74522_800.jpg"], customFields: {} },
-            { id: "case-d6", name: "iHAVECPU IHC R03 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm.", weight: "330 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74523_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74524_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74525_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74526_800.jpg"], customFields: {} },
-            { id: "case-d7", name: "iHAVECPU IHC R30 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm.", weight: "330 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157219_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157220_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157221_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157222_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157223_800.jpg"], customFields: {} },
-            { id: "case-d8", name: "iHAVECPU IHC R30 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm.", weight: "330 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157229_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157230_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157231_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157232_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157233_800.jpg"], customFields: {} },
-            { id: "case-d9", name: "OCYPUS x iHAVECPU GAMMA C50 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "160 mm.", weight: "340 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187112_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187113_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187114_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187116_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187117_800.jpg"], customFields: {} },
-            { id: "case-d10", name: "OCYPUS x iHAVECPU GAMMA C50 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "160 mm.", weight: "340 mm.", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187151_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187152_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187153_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187155_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187156_800.jpg"], customFields: {} },
+            { id: "case-d3", name: "iHAVECPU IHC 401TG (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84798_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84799_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84802_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84801_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84803_800.jpg"], customFields: {} },
+            { id: "case-d4", name: "iHAVECPU IHC 401TG (WHITE)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84804_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84805_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84808_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84807_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84809_800.jpg"], isSoldOut: true, customFields: {} },
+            { id: "case-d5", name: "iHAVECPU IHC R03 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "330 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74519_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74520_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74521_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74522_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-d6", name: "iHAVECPU IHC R03 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "330 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74523_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74524_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74525_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74526_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-d7", name: "iHAVECPU IHC R30 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "330 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157219_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157220_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157221_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157222_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157223_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-d8", name: "iHAVECPU IHC R30 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "330 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157229_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157230_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157231_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157232_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products157233_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-d9", name: "OCYPUS x iHAVECPU GAMMA C50 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "160 mm", weight: "340 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187112_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187113_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187114_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187116_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187117_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-d10", name: "OCYPUS x iHAVECPU GAMMA C50 (WHITE)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "160 mm", weight: "340 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187151_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187152_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187153_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187155_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products187156_800.jpg"], isPopular: true, customFields: {} },
 
-            // ZONE C (14 รายการ)
-            { id: "case-c1", name: "CORSAIR 4000D AIRFLOW Black", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "170 มม.", weight: "360 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Corsair+4000D"], customFields: {} },
-            { id: "case-c2", name: "NZXT H5 Flow Matte Black", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "165 มม.", weight: "365 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=NZXT+H5+Flow"], customFields: {} },
-            { id: "case-c3", name: "Phanteks Eclipse P300A", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "165 มม.", weight: "355 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Phanteks+P300A"], customFields: {} },
-            { id: "case-c4", name: "Fractal Design Focus G", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "165 มม.", weight: "380 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Fractal+Focus+G"], customFields: {} },
-            { id: "case-c5", name: "be quiet! Pure Base 500", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "190 มม.", weight: "369 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Pure+Base+500"], customFields: {} },
-            { id: "case-c6", name: "Lian Li Lancool 215 Mesh", zone: "ZONE C", mbType: "E-ATX / ATX", dimension: "166 มม.", weight: "370 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Lancool+215"], customFields: {} },
-            { id: "case-c7", name: "ThermalTake Divider 300 TG", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "145 มม.", weight: "360 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=TT+Divider+300"], customFields: {} },
-            { id: "case-c8", name: "Cooler Master MasterBox TD500", zone: "ZONE C", mbType: "E-ATX / ATX", dimension: "165 มม.", weight: "410 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=MasterBox+TD500"], customFields: {} },
-            { id: "case-c9", name: "Antec DF600 FLUX Mid-Tower", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "175 มม.", weight: "405 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Antec+DF600"], customFields: {} },
-            { id: "case-c10", name: "SilverStone FARA R1 PRO", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "165 มม.", weight: "322 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=FARA+R1+PRO"], customFields: {} },
-            { id: "case-c11", name: "Deepcool CC560 ARGB", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "163 มม.", weight: "370 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Deepcool+CC560"], customFields: {} },
-            { id: "case-c12", name: "Zalman S2 ATX Mid Tower", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "156 มม.", weight: "330 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Zalman+S2"], customFields: {} },
-            { id: "case-c13", name: "Montech AIR 900 MESH", zone: "ZONE C", mbType: "E-ATX / ATX", dimension: "165 มม.", weight: "370 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=Montech+AIR+900"], customFields: {} },
-            { id: "case-c14", name: "InWin 101 Black Tempered Glass", zone: "ZONE C", mbType: "ATX / Micro-ATX", dimension: "160 มม.", weight: "421 มม.", images: ["https://placehold.co/600x600/dbeafe/1e40af?text=InWin+101"], customFields: {} },
+            // ZONE C (11 รายการ)
+            { id: "case-c1", name: "GIGABYTE C102 GLASS (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/54e29e5aa8a665d8d5ec43a34ba81d83/ProductRemoveBg/40213/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/087bc8a3a198e6b9f993a85bf49195c3/ProductRemoveBg/40217/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/dc18790ee3b6d82cfcb06f31b0140264/ProductRemoveBg/40215/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/5453f408c9b017dcf12914578d2a63b5/ProductRemoveBg/40216/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/6aad595cd26a934106e78eae3a12363c/ProductRemoveBg/40214/webp/670"], customFields: {} },
+            { id: "case-c2", name: "GIGABYTE C102 GLASS ICE (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/4dde0470d15c99a640805e9e031148d1/ProductRemoveBg/40200/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/d29000f51f12211d3816600f964e6dd3/ProductRemoveBg/40204/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/0d402de2f51a6f041c705422076a4cc0/ProductRemoveBg/40202/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/ceb4a8ea7d00c88bb2a10a6c2ccf7279/ProductRemoveBg/40203/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/2dba095bef949f1ed34afd488c982492/ProductRemoveBg/40201/webp/670"], customFields: {} },
+            { id: "case-c3", name: "iHAVECPU G390 V2 (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98330_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98332_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98331_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-c4", name: "iHAVECPU G390 V2 (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98333_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98335_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98334_800.jpg"], customFields: {} },
+            { id: "case-c5", name: "iHAVECPU IHC 102 WOOD (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83412_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83413_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83414_800.jpg"], customFields: {} },
+            { id: "case-c6", name: "iHAVECPU IHC 102 WOOD (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83415_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83416_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83417_800.jpg"], isSoldOut: true, customFields: {} },
+            { id: "case-c7", name: "OCYPUS x iHAVECPU GAMMA C52 ARGB (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124188_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124189_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124192_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124193_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124191_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-c8", name: "OCYPUS x iHAVECPU GAMMA C52 ARGB (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124197_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124198_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124201_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124202_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124200_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-c9", name: "iHAVECPU GLACIER V2 (BLACK)(ATX)", zone: "ZONE C", mbType: "ATX,Micro-ATX,ITX", dimension: "165 mm", weight: "390 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products181832_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products181833_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products181834_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-c10", name: "iHAVECPU OA01 (WHITE)(ATX)", zone: "ZONE C", mbType: "ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "315 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98728_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98731_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98733_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98734_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98732_800.jpg"], isSoldOut: true, customFields: {} },
+            { id: "case-c11", name: "iHAVECPU PRISMA ARGB (BLACK)(ATX)", zone: "ZONE C", mbType: "ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products174311_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products174312_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products174317_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products174315_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products174316_800.jpg"], isPopular: true, customFields: {} },
 
-            // ZONE A (9 รายการ)
-            { id: "case-a1", name: "Montech King 95 Pro White", zone: "ZONE A", mbType: "ATX / Micro-ATX", dimension: "175 มม.", weight: "420 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=Montech+King+95"], customFields: {} },
-            { id: "case-a2", name: "NZXT H7 Flow RGB (2024)", zone: "ZONE A", mbType: "E-ATX / ATX", dimension: "185 มม.", weight: "400 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=NZXT+H7+Flow"], customFields: {} },
-            { id: "case-a3", name: "Lian Li Lancool III RGB", zone: "ZONE A", mbType: "E-ATX / ATX", dimension: "187 มม.", weight: "435 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=Lancool+III"], customFields: {} },
-            { id: "case-a4", name: "Fractal Design Pop Air RGB", zone: "ZONE A", mbType: "ATX / Micro-ATX", dimension: "170 มม.", weight: "405 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=Pop+Air+RGB"], customFields: {} },
-            { id: "case-a5", name: "CORSAIR 5000D AIRFLOW", zone: "ZONE A", mbType: "E-ATX / ATX", dimension: "170 มม.", weight: "420 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=Corsair+5000D"], customFields: {} },
-            { id: "case-a6", name: "Phanteks NV5 Mid-Tower", zone: "ZONE A", mbType: "E-ATX / ATX", dimension: "180 มม.", weight: "440 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=Phanteks+NV5"], customFields: {} },
-            { id: "case-a7", name: "HYTE Y40 S-Tier Aesthetic", zone: "ZONE A", mbType: "ATX / Micro-ATX", dimension: "183 มม.", weight: "422 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=HYTE+Y40"], customFields: {} },
-            { id: "case-a8", name: "Cooler Master MasterBox 520", zone: "ZONE A", mbType: "SSI CEB / E-ATX", dimension: "165 มม.", weight: "410 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=MasterBox+520"], customFields: {} },
-            { id: "case-a9", name: "ASUS TUF Gaming GT502", zone: "ZONE A", mbType: "ATX / Micro-ATX", dimension: "163 มม.", weight: "400 มม.", images: ["https://placehold.co/600x600/f3e8ff/6b21a8?text=TUF+GT502"], customFields: {} },
+            // ZONE A (7 รายการ)
+            { id: "case-a1", name: "OCYPUS x iHAVECPU GAMMA C72 ARGB (BLACK)(ATX)", zone: "ZONE A", mbType: "ATX,Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124143_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124147_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124150_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124148_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124149_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a2", name: "OCYPUS x iHAVECPU GAMMA C72 ARGB (WHITE)(ATX)", zone: "ZONE A", mbType: "ATX,Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124155_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124159_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124162_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124160_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124161_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a3", name: "iHAVECPU K609 (BLACK)(ATX)", zone: "ZONE A", mbType: "ATX,Micro-ATX,ITX", dimension: "165 mm", weight: "400 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113906_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113908_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113909_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113911_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113912_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a4", name: "iHAVECPU K609 (WHITE)(ATX)", zone: "ZONE A", mbType: "ATX,Micro-ATX,ITX", dimension: "165 mm", weight: "400 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113899_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113901_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113902_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113904_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products113905_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a5", name: "OCYPUS x IHC DELTA C40 WOOD (BLACK)(mATX)", zone: "ZONE A", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "420 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products182999_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183000_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183001_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183005_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183007_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a6", name: "OCYPUS x IHC DELTA C40 WOOD (WHITE)(mATX)", zone: "ZONE A", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "420 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183008_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183009_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183010_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183013_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products183016_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-a7", name: "NZXT H5 FLOW [2024] (WHITE)(E-ATX)", zone: "ZONE A", mbType: "ATX,Micro-ATX,ITX", dimension: "170 mm", weight: "410 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74440_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74442_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74443_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74441_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74444_800.jpg"], customFields: {} },
 
-            // ZONE B (8 รายการ)
-            { id: "case-b1", name: "Deepcool CH560 DIGITAL White", zone: "ZONE B", mbType: "E-ATX / ATX", dimension: "175 มม.", weight: "380 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=Deepcool+CH560"], customFields: {} },
-            { id: "case-b2", name: "ThermalTake Ceres 300 TG", zone: "ZONE B", mbType: "E-ATX / ATX", dimension: "185 มม.", weight: "370 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=TT+Ceres+300"], customFields: {} },
-            { id: "case-b3", name: "Antec Performance 1 FT", zone: "ZONE B", mbType: "E-ATX / ATX", dimension: "175 มม.", weight: "400 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=Antec+P1+FT"], customFields: {} },
-            { id: "case-b4", name: "be quiet! Shadow Base 800", zone: "ZONE B", mbType: "E-ATX / ATX", dimension: "180 มม.", weight: "430 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=Shadow+Base+800"], customFields: {} },
-            { id: "case-b5", name: "SilverStone ALTA G1M", zone: "ZONE B", mbType: "Micro-ATX / Mini-ITX", dimension: "159 มม.", weight: "355 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=ALTA+G1M"], customFields: {} },
-            { id: "case-b6", name: "Cougar Dust 2 Mini-ITX", zone: "ZONE B", mbType: "Mini-ITX", dimension: "70 มม.", weight: "330 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=Cougar+Dust+2"], customFields: {} },
-            { id: "case-b7", name: "MSI MPG GUNGNIR 300R", zone: "ZONE B", mbType: "E-ATX / ATX", dimension: "175 มม.", weight: "360 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=MPG+Gungnir+300R"], customFields: {} },
-            { id: "case-b8", name: "Jonsbo D41 Mesh Screen", zone: "ZONE B", mbType: "ATX / Micro-ATX", dimension: "168 มม.", weight: "400 มม.", images: ["https://placehold.co/600x600/fce7f3/9d174d?text=Jonsbo+D41"], customFields: {} },
-
-            // ZONE PREMIUM (9 รายการ)
-            { id: "case-p1", name: "Lian Li O11 Dynamic EVO XL", zone: "ZONE PREMIUM", mbType: "E-ATX / ATX", dimension: "167 มม.", weight: "460 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=Lian+Li+O11+EVO+XL"], customFields: {} },
-            { id: "case-p2", name: "ASUS ROG Hyperion GR701", zone: "ZONE PREMIUM", mbType: "E-ATX / ATX", dimension: "190 มม.", weight: "460 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=ROG+Hyperion"], customFields: {} },
-            { id: "case-p3", name: "HYTE Y70 Touch Infinite Display", zone: "ZONE PREMIUM", mbType: "E-ATX / ATX", dimension: "180 มม.", weight: "422 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=HYTE+Y70+Touch"], customFields: {} },
-            { id: "case-p4", name: "Fractal Design North XL Walnut", zone: "ZONE PREMIUM", mbType: "E-ATX / ATX", dimension: "185 มม.", weight: "413 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=Fractal+North+XL"], customFields: {} },
-            { id: "case-p5", name: "NZXT H9 Elite Dual-Chamber", zone: "ZONE PREMIUM", mbType: "ATX / Micro-ATX", dimension: "165 มม.", weight: "435 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=NZXT+H9+Elite"], customFields: {} },
-            { id: "case-p6", name: "CORSAIR iCUE 7000X RGB", zone: "ZONE PREMIUM", mbType: "ATX / Full Tower", dimension: "190 มม.", weight: "450 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=Corsair+7000X"], customFields: {} },
-            { id: "case-p7", name: "Phanteks NV9 Full-Tower Showcase", zone: "ZONE PREMIUM", mbType: "E-ATX / SSI-EEB", dimension: "205 มม.", weight: "490 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=Phanteks+NV9"], customFields: {} },
-            { id: "case-p8", name: "Cooler Master Cosmos C700P", zone: "ZONE PREMIUM", mbType: "E-ATX / Full Tower", dimension: "198 มม.", weight: "490 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=Cosmos+C700P"], customFields: {} },
-            { id: "case-p9", name: "InWin 925 Full Tower Premium", zone: "ZONE PREMIUM", mbType: "E-ATX / Full Tower", dimension: "200 มม.", weight: "420 มม.", images: ["https://placehold.co/600x600/fef3c7/78350f?text=InWin+925"], customFields: {} }
+            // ZONE B (6 รายการ)
+            { id: "case-b1", name: "iHAVECPU CRYSTAL Z6 (BLACK)(ATX)", zone: "ZONE B", mbType: "ATX,Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products69518_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products69519_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products69517_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products69520_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products69521_800.jpg"], customFields: {} },
+            { id: "case-b2", name: "NZXT H5 FLOW RGB [2024] (WHITE)(E-ATX)", zone: "ZONE B", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "170 mm", weight: "410 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110164_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110115_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110118_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110116_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110119_800.jpg"], customFields: {} },
+            { id: "case-b3", name: "THERMALTAKE VIEW 270 TG REVERSED ARGB (BLACK)(E-ATX)", zone: "ZONE B", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "420 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80648_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80650_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80651_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80649_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80652_800.jpg"], customFields: {} },
+            { id: "case-b4", name: "THERMALTAKE VIEW 270 TG REVERSED ARGB (SNOW)(E-ATX)", zone: "ZONE B", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "420 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products110560_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80643_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80644_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80642_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products80646_800.jpg"], customFields: {} },
+            { id: "case-b5", name: "OCYPUS IOTA C50 CURVE ARGB (BLACK)(mATX)", zone: "ZONE B", mbType: "Micro-ATX,ITX", dimension: "160 mm", weight: "445 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134857_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134861_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134862_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134863_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134864_800.jpg"], isPopular: true, customFields: {} },
+            { id: "case-b6", name: "OCYPUS IOTA C50 CURVE ARGB (WHITE)(mATX)", zone: "ZONE B", mbType: "Micro-ATX,ITX", dimension: "160 mm", weight: "445 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134875_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134879_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134880_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134881_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products134882_800.jpg"], isPopular: true, customFields: {} }
         ];
 
         let casesData = JSON.parse(localStorage.getItem('ihavecpu_cases')) || initial50CasesData;
@@ -407,7 +387,6 @@
                 case 'ZONE C': return 'bg-blue-600 text-white';
                 case 'ZONE A': return 'bg-purple-600 text-white';
                 case 'ZONE B': return 'bg-pink-600 text-white';
-                case 'ZONE PREMIUM': return 'bg-amber-500 text-slate-950 font-bold';
                 default: return 'bg-slate-700 text-white';
             }
         }
@@ -418,7 +397,6 @@
                 case 'ZONE C': return 'text-blue-700 border-blue-200 bg-blue-50/50';
                 case 'ZONE A': return 'text-purple-700 border-purple-200 bg-purple-50/50';
                 case 'ZONE B': return 'text-pink-700 border-pink-200 bg-pink-50/50';
-                case 'ZONE PREMIUM': return 'text-amber-700 border-amber-200 bg-amber-50/50';
                 default: return 'text-slate-800 border-slate-200 bg-slate-50';
             }
         }
@@ -444,7 +422,7 @@
             const emptyState = document.getElementById('emptyState');
             container.innerHTML = '';
 
-            const zonesOrder = ['ZONE D', 'ZONE C', 'ZONE A', 'ZONE B', 'ZONE PREMIUM'];
+            const zonesOrder = ['ZONE D', 'ZONE C', 'ZONE A', 'ZONE B'];
             const targetZones = currentFilterZone === 'ALL' ? zonesOrder : [currentFilterZone];
 
             let totalVisibleCount = 0;
@@ -464,9 +442,9 @@
                 let sectionHeaderHtml = `
                     <div class="flex items-center justify-between pb-3 border-b-2 ${headerStyle} px-4 py-3 rounded-2xl">
                         <div class="flex items-center gap-2.5">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-xs ${badgeColor}">${zoneName}</span>
+                            <span class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider shadow-xs ${badgeColor}">${zoneName}</span>
                         </div>
-                        <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs">${zoneCases.length} รายการ</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs">${zoneCases.length} รายการ</span>
                     </div>
                 `;
 
@@ -480,8 +458,14 @@
                     let btnText = 'เลือกเคสนี้';
                     let iconName = 'plus-circle';
                     let cardBorder = 'border-slate-200/80 shadow-xs';
+                    let actionOnClick = `toggleSelectCase('${c.id}')`;
 
-                    if (isSelected) {
+                    if (c.isSoldOut) {
+                        btnClass = 'bg-slate-100 text-slate-400 cursor-not-allowed';
+                        btnText = 'สินค้าหมด';
+                        iconName = 'slash';
+                        actionOnClick = '';
+                    } else if (isSelected) {
                         if (selectedIndex === 0) {
                             btnClass = 'bg-red-600 hover:bg-red-700 text-white shadow-md';
                             btnText = 'เคสหลัก (คลิกเพื่อยกเลิก)';
@@ -496,6 +480,36 @@
 
                     let imgList = c.images && c.images.length > 0 ? c.images : ['https://placehold.co/600x600/eeeeee/999999?text=No+Image'];
                     
+                    // ปรับแต่งขนาดรูปเฉพาะเคสที่มีขอบภาพไม่เท่ากัน
+                    let imgPaddingClass = "p-3";
+                    if (c.id === "case-d1" || c.id === "case-c1" || c.id === "case-c2") {
+                        imgPaddingClass = "p-5";
+                    } else if (c.id === "case-d2") {
+                        imgPaddingClass = "p-1 scale-125";
+                    }
+
+                    let soldOutOverlay = '';
+                    let soldOutImageStyle = '';
+                    if (c.isSoldOut) {
+                        soldOutImageStyle = 'grayscale opacity-40';
+                        soldOutOverlay = `
+                            <div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                                <span class="bg-red-600/90 text-white text-base sm:text-lg font-black px-6 py-2 rounded-2xl shadow-xl uppercase tracking-widest transform -rotate-12 border-2 border-white/80 backdrop-blur-sm">
+                                    หมด
+                                </span>
+                            </div>
+                        `;
+                    }
+
+                    let popularBadgeHtml = '';
+                    if (c.isPopular && !c.isSoldOut) {
+                        popularBadgeHtml = `
+                            <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 backdrop-blur-md bg-amber-500/90 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full uppercase tracking-wider pointer-events-none shadow-sm flex items-center gap-1 border border-amber-300/50 animate-pulse">
+                                <i data-lucide="flame" class="w-3 h-3 fill-white text-white"></i> ยอดนิยม
+                            </div>
+                        `;
+                    }
+
                     let customFieldsHtml = '';
                     if (customFields && customFields.length > 0) {
                         customFields.forEach(field => {
@@ -522,19 +536,22 @@
                     gridHtml += `
                         <div class="apple-card bg-white rounded-2xl sm:rounded-3xl border ${cardBorder} overflow-hidden flex flex-col justify-between">
                             <div>
-                                <!-- เปลี่ยนพื้นหลังเป็น bg-white ที่นี่เพื่อให้พื้นหลังรูปภาพเป็นสีขาว -->
                                 <div class="relative bg-white aspect-square overflow-hidden group">
                                     <div class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 backdrop-blur-md text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full uppercase tracking-wider pointer-events-none shadow-sm ${badgeColorClass}">
                                         ${c.zone}
                                     </div>
                                     
-                                    <div class="w-full h-full relative bg-white cursor-zoom-in" onclick="openImageZoom('${c.id}')">
-                                        <img src="${imgList[0]}" alt="${c.name}" class="w-full h-full object-contain p-2 transition duration-300 group-hover:scale-105" id="main-img-${c.id}">
+                                    ${popularBadgeHtml}
+                                    ${soldOutOverlay}
+
+                                    <div class="w-full h-full relative bg-white cursor-zoom-in overflow-hidden flex items-center justify-center" onclick="openImageZoom('${c.id}')">
+                                        <img src="${imgList[0]}" alt="${c.name}" class="w-full h-full object-contain ${imgPaddingClass} ${soldOutImageStyle} transition duration-300 group-hover:scale-105" id="main-img-${c.id}">
+                                        ${!c.isSoldOut ? `
                                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
                                             <span class="bg-black/60 backdrop-blur-md text-white text-[9px] sm:text-[10px] px-2 py-1 rounded-lg flex items-center gap-1">
                                                 <i data-lucide="zoom-in" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i> ดูรูปใหญ่
                                             </span>
-                                        </div>
+                                        </div>` : ''}
                                     </div>
 
                                     ${isAdminLoggedIn ? `
@@ -566,7 +583,7 @@
                                 </div>
                             </div>
                             <div class="p-2.5 sm:p-5 pt-0">
-                                <button onclick="toggleSelectCase('${c.id}')" class="w-full py-2 sm:py-2.5 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 ${btnClass}">
+                                <button onclick="${actionOnClick}" ${c.isSoldOut ? 'disabled' : ''} class="w-full py-2 sm:py-2.5 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 ${btnClass}">
                                     <i data-lucide="${iconName}" class="w-3.5 h-3.5"></i>
                                     ${btnText}
                                 </button>
@@ -667,6 +684,9 @@
         }
 
         function toggleSelectCase(id) {
+            const c = casesData.find(item => item.id === id);
+            if (c && c.isSoldOut) return;
+
             const index = selectedCaseIds.indexOf(id);
             if (index > -1) {
                 selectedCaseIds.splice(index, 1);
@@ -998,7 +1018,6 @@
         function showToast(message) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMessage').innerText = message;
-            toast.classList.0 ? '' : toast.classList.remove('translate-y-16', 'opacity-0');
             toast.classList.remove('translate-y-16', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-16', 'opacity-0');
