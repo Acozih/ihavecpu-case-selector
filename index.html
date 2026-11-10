@@ -65,7 +65,7 @@
     <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div ondblclick="openAdminAuthModal()" class="bg-black text-white font-black px-3.5 py-1.5 rounded-xl text-sm tracking-wider select-none flex items-center gap-2 cursor-pointer hover:bg-slate-800 transition" title="ดับเบิ้ลคลิกเพื่อเปิด Admin">
+                <div class="bg-black text-white font-black px-3.5 py-1.5 rounded-xl text-sm tracking-wider select-none flex items-center gap-2">
                     iHAVECPU
                 </div>
             </div>
@@ -780,8 +780,9 @@
             showToast('คัดลอกข้อความสำเร็จแล้ว!');
         }
 
+        // เปิดหน้าล็อกอิน Admin ได้ด้วย Alt+Shift+A เท่านั้น
         window.addEventListener('keydown', (e) => {
-            if (e.altKey && e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'ฺ')) {
+            if (e.altKey && e.shiftKey && e.code === 'KeyA') {
                 e.preventDefault();
                 openAdminAuthModal();
             }
