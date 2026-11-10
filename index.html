@@ -329,8 +329,8 @@
     <script>
         const initial50CasesData = [
             // ZONE D (10 รายการ)
-            { id: "case-d1", name: "GIGABYTE C103 GLASS AutoRGB (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,Mini-ITX", dimension: "165 mm", weight: "355 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/38ddef18f93c9646f80555b18cf00055/ProductRemoveBg/47932/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/8c415eb56f62d26bbbb9678c4fb5cfbe/ProductRemoveBg/47934/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/c59679eb76905eb2c73823ebfd6ca4b7/ProductRemoveBg/47933/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/00b8853cc0ab98159883030360987681/ProductRemoveBg/47935/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/75314551c87552491f4fb35d59ee6a48/ProductRemoveBg/47936/webp/670"], customFields: {} },
-            { id: "case-d2", name: "ID-COOLING WARE 300 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX/ITX", dimension: "160 mm", weight: "320 mm", images: ["https://static.idcooling.com/detail/20260520/%E6%9C%BA%E7%AE%B1Gallery_1546_fwmu5w.png","https://static.idcooling.com/detail/20260625/3_rkv685.jpg","https://static.idcooling.com/detail/20260625/6_qxzk3v.jpg","https://static.idcooling.com/detail/20260625/4_gsr988.jpg","https://static.idcooling.com/detail/20260625/5_jk26ov.jpg"], customFields: {} },
+            { id: "case-d1", name: "GIGABYTE C103 GLASS AutoRGB (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,Mini-ITX", dimension: "165 mm", weight: "355 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products175114_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products175116_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products175115_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products175119_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products175117_800.jpg"], customFields: {} },
+            { id: "case-d2", name: "ID-COOLING WARE 300 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX/ITX", dimension: "160 mm", weight: "320 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products192047_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products192049_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products192052_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products192051_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products192048_800.jpg"], customFields: {} },
             { id: "case-d3", name: "iHAVECPU IHC 401TG (BLACK)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84798_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84799_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84802_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84801_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84803_800.jpg"], customFields: {} },
             { id: "case-d4", name: "iHAVECPU IHC 401TG (WHITE)(ATX)", zone: "ZONE D", mbType: "ATX,Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84804_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84805_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84808_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84807_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products84809_800.jpg"], isSoldOut: true, customFields: {} },
             { id: "case-d5", name: "iHAVECPU IHC R03 (BLACK)(mATX)", zone: "ZONE D", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "330 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74519_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74520_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74521_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products74522_800.jpg"], isPopular: true, customFields: {} },
@@ -485,7 +485,8 @@
                     if (c.id === "case-d1" || c.id === "case-c1" || c.id === "case-c2") {
                         imgPaddingClass = "p-5";
                     } else if (c.id === "case-d2") {
-                        imgPaddingClass = "p-1 scale-125";
+                        // ให้ภาพ WARE 300 ใช้พื้นที่และสเกลเดียวกับภาพเคสทั่วไป
+                        imgPaddingClass = "p-5";
                     }
 
                     let soldOutOverlay = '';
@@ -504,8 +505,8 @@
                     let popularBadgeHtml = '';
                     if (c.isPopular && !c.isSoldOut) {
                         popularBadgeHtml = `
-                            <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 backdrop-blur-md bg-amber-500/90 text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full uppercase tracking-wider pointer-events-none shadow-sm flex items-center gap-1 border border-amber-300/50 animate-pulse">
-                                <i data-lucide="flame" class="w-3 h-3 fill-white text-white"></i> ยอดนิยม
+                            <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 bg-gradient-to-r from-red-600 to-orange-500 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 sm:px-2 rounded-full uppercase tracking-wider pointer-events-none shadow-sm flex items-center gap-1 border border-orange-300/50">
+                                <i data-lucide="flame" class="w-2.5 h-2.5 fill-white text-white"></i> ยอดนิยม
                             </div>
                         `;
                     }
