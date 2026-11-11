@@ -669,6 +669,23 @@
             opacity: 0.88 !important;
         }
 
+    
+        /* Full hero rectangle: lavender-to-pink fill and matching gradient frame, with no white center. */
+        #heroPanel {
+            background:
+                linear-gradient(125deg, #eee8f8 0%, #f4edf8 48%, #f8eaf1 100%) padding-box,
+                linear-gradient(110deg, #cdb9e8 0%, #dac8ef 36%, #edcfe2 72%, #f3d8e6 100%) border-box !important;
+            box-shadow:
+                0 18px 42px rgba(91,68,117,0.095),
+                0 5px 14px rgba(139,96,132,0.065),
+                0 0 24px rgba(222,191,222,0.11),
+                inset 0 1px 0 rgba(255,255,255,0.58) !important;
+        }
+        #heroPanel::before {
+            background: linear-gradient(90deg, #c7afe6 0%, #dfc7ee 52%, #f0cfe0 100%) !important;
+            opacity: 0.92 !important;
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
