@@ -186,7 +186,7 @@
         @keyframes case-water-ripple {
             0% { transform: translate(-50%, -50%) scale(0.15); opacity: 0.92; }
             70% { opacity: 0.48; }
-            100% { transform: translate(-50%, -50%) scale(4.4); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(3.08); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
             .case-water-wave { animation-duration: 0.01ms; animation-delay: 0ms; }
@@ -1034,6 +1034,16 @@
             .case-select-button:active::after,
             .case-select-button.is-pressing::after { animation: none !important; opacity: 0.2; }
         }
+
+    
+        /* Main-case button: vivid red-to-yellow gradient with dark readable label. */
+        .case-select-button.bg-red-600 {
+            background: linear-gradient(110deg, #ff4444 0%, #facc15 100%) !important;
+            color: #111111 !important;
+            border: 1px solid rgba(180,83,9,0.24) !important;
+            box-shadow: 0 5px 13px rgba(210,74,43,0.23), inset 0 1px 0 rgba(255,255,255,0.36) !important;
+        }
+        .case-select-button.bg-red-600:hover { filter: saturate(1.08) brightness(0.98); }
 
     </style>
 </head>
