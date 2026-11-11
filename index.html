@@ -191,6 +191,101 @@
         @media (prefers-reduced-motion: reduce) {
             .case-water-wave { animation-duration: 0.01ms; animation-delay: 0ms; }
         }
+
+        /* Reference-inspired light dashboard skin: white surfaces, soft neutral shadows, restrained charcoal/indigo accents. */
+        body {
+            background-color: #f4f5f7 !important;
+            background-image: linear-gradient(180deg, #f3f4f6 0%, #f8f9fb 46%, #f3f4f6 100%) !important;
+            color: #2b2d34 !important;
+        }
+        header.sticky {
+            background: rgba(255,255,255,0.97) !important;
+            border-color: #e7e8ec !important;
+            box-shadow: 0 2px 12px rgba(34,36,45,0.035);
+        }
+        #mainTitle {
+            color: #292b32 !important;
+            background: none !important;
+            -webkit-text-fill-color: #292b32 !important;
+        }
+        .apple-card {
+            background: #fff !important;
+            border-color: #e8e9ed !important;
+            box-shadow: 0 8px 24px rgba(32,35,46,0.075), 0 1px 3px rgba(32,35,46,0.035), inset 0 1px 0 rgba(255,255,255,0.98) !important;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .apple-card:hover {
+            box-shadow: 0 12px 30px rgba(32,35,46,0.105), 0 2px 5px rgba(32,35,46,0.045), inset 0 1px 0 rgba(255,255,255,0.98) !important;
+        }
+        #zonesContainer > div > div:first-child {
+            background: linear-gradient(180deg, #fff 0%, #f5f6f8 100%) !important;
+            border-color: #dfe1e6 !important;
+            box-shadow: 0 4px 14px rgba(32,35,46,0.045);
+        }
+        #zonesContainer > div > div:first-child > div > span {
+            background: linear-gradient(110deg, #30323a 0%, #50535f 100%) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 3px 9px rgba(35,37,48,0.16);
+        }
+        button.zone-btn {
+            background: linear-gradient(180deg, #fff 0%, #f7f8fa 100%) !important;
+            border: 1px solid #e2e4e9 !important;
+            color: #555862 !important;
+            box-shadow: 0 3px 10px rgba(32,35,46,0.055), inset 0 1px 0 rgba(255,255,255,0.95);
+            transition: background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+        }
+        button.zone-btn:hover {
+            background: #f0f1f4 !important;
+            color: #30323a !important;
+        }
+        button.zone-btn.bg-black {
+            background: linear-gradient(110deg, #30323a 0%, #454957 62%, #555b6e 100%) !important;
+            border-color: transparent !important;
+            color: #fff !important;
+            box-shadow: 0 5px 13px rgba(38,40,52,0.19), inset 0 1px 0 rgba(255,255,255,0.14);
+        }
+        .apple-card button.bg-slate-700 {
+            background: linear-gradient(105deg, #3a3b47 0%, #4d5065 58%, #5b6191 100%) !important;
+            box-shadow: 0 4px 11px rgba(53,56,84,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .apple-card button.bg-slate-700:hover {
+            filter: brightness(1.08);
+        }
+        #floatingBar {
+            background: linear-gradient(110deg, #272930 0%, #333641 58%, #414653 100%) !important;
+            border-color: rgba(255,255,255,0.14) !important;
+            box-shadow: 0 12px 32px rgba(27,29,36,0.25) !important;
+        }
+        #notifyBtn {
+            background: linear-gradient(105deg, #51479a 0%, #625eaa 55%, #596caa 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 5px 14px rgba(77,72,151,0.22);
+        }
+        #notifyBtn, #notifyBtn i { color: #fff !important; }
+        #adminPanel {
+            background: linear-gradient(180deg, #fff 0%, #f8f8fa 100%) !important;
+            border-color: #e4e5e9 !important;
+            box-shadow: 0 8px 24px rgba(32,35,46,0.065) !important;
+        }
+        #emptyState {
+            background: linear-gradient(180deg, #fff 0%, #f7f8fa 100%) !important;
+            border-color: #e5e6ea !important;
+            box-shadow: 0 8px 24px rgba(32,35,46,0.06) !important;
+        }
+        input, select, textarea {
+            border-color: #dfe1e6 !important;
+            box-shadow: inset 0 1px 2px rgba(32,35,46,0.025);
+        }
+        input:focus, select:focus, textarea:focus {
+            --tw-ring-color: rgba(89,91,137,0.35) !important;
+            border-color: #777b9a !important;
+        }
+        button:focus-visible, a:focus-visible {
+            outline: 3px solid rgba(92,94,145,0.4);
+            outline-offset: 2px;
+        }
+
 </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
