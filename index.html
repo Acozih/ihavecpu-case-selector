@@ -136,6 +136,7 @@
             <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (11)</button>
             <button onclick="filterZone('ZONE A')" data-zone="ZONE A" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (7)</button>
             <button onclick="filterZone('ZONE B')" data-zone="ZONE B" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (6)</button>
+            <button onclick="filterZone('ZONE PREMIUM')" data-zone="ZONE PREMIUM" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE PREMIUM (4)</button>
         </div>
 
         <!-- Cases Container (แยกทีละแถว / Section ตาม ZONE) -->
@@ -398,6 +399,7 @@
                 case 'ZONE C': return 'bg-blue-600 text-white';
                 case 'ZONE A': return 'bg-purple-600 text-white';
                 case 'ZONE B': return 'bg-pink-600 text-white';
+                case 'ZONE PREMIUM': return 'bg-gradient-to-r from-slate-300 via-gray-100 to-slate-400 text-slate-800 border border-slate-300';
                 default: return 'bg-slate-700 text-white';
             }
         }
@@ -408,6 +410,7 @@
                 case 'ZONE C': return 'text-blue-700 border-blue-200 bg-blue-50/50';
                 case 'ZONE A': return 'text-purple-700 border-purple-200 bg-purple-50/50';
                 case 'ZONE B': return 'text-pink-700 border-pink-200 bg-pink-50/50';
+                case 'ZONE PREMIUM': return 'text-slate-700 border-slate-300 bg-gradient-to-r from-slate-100 via-white to-slate-200';
                 default: return 'text-slate-800 border-slate-200 bg-slate-50';
             }
         }
@@ -433,13 +436,36 @@
             const emptyState = document.getElementById('emptyState');
             container.innerHTML = '';
 
-            const zonesOrder = ['ZONE D', 'ZONE C', 'ZONE A', 'ZONE B'];
+            const zonesOrder = ['ZONE D', 'ZONE C', 'ZONE A', 'ZONE B', 'ZONE PREMIUM'];
             const targetZones = currentFilterZone === 'ALL' ? zonesOrder : [currentFilterZone];
 
             let totalVisibleCount = 0;
 
             targetZones.forEach(zoneName => {
                 const zoneCases = casesData.filter(c => c.zone === zoneName);
+                if (zoneName === 'ZONE PREMIUM') {
+                    const placeholderCount = 4;
+                    totalVisibleCount += placeholderCount;
+                    const premiumSection = document.createElement('div');
+                    premiumSection.className = 'space-y-4';
+                    premiumSection.innerHTML = `
+                        <div class="flex items-center justify-between pb-3 border-b-2 text-slate-700 border-slate-300 bg-gradient-to-r from-slate-100 via-white to-slate-200 px-4 py-3 rounded-2xl">
+                            <div class="flex items-center gap-2.5">
+                                <span class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider shadow-xs bg-gradient-to-r from-slate-300 via-gray-100 to-slate-400 text-slate-800 border border-slate-300">ZONE PREMIUM</span>
+                            </div>
+                            <span class="text-xs sm:text-sm font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs">4 รายการ</span>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6">
+                            ${Array.from({length: placeholderCount}, (_, i) => `
+                                <div class="min-h-[220px] sm:min-h-[280px] rounded-2xl sm:rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 shadow-sm flex items-center justify-center p-4">
+                                    <span class="text-slate-500 text-base sm:text-lg font-semibold tracking-wide">Coming Soon</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(premiumSection);
+                    return;
+                }
                 if (zoneCases.length === 0) return;
 
                 totalVisibleCount += zoneCases.length;
