@@ -389,6 +389,117 @@
             }
         }
 
+    
+        /* Behance dashboard-inspired layout: quiet canvas, modular white cards, soft shadows and restrained dark controls. */
+        body {
+            background-color: #f3f4f7 !important;
+            background-image: linear-gradient(180deg, #f2f3f6 0%, #f8f9fb 42%, #f2f3f6 100%) !important;
+            color: #292b32 !important;
+        }
+        header.sticky {
+            background: rgba(255,255,255,0.97) !important;
+            border-color: #e6e7eb !important;
+            box-shadow: 0 2px 14px rgba(28,30,38,0.045);
+        }
+        #heroPanel {
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, #ffffff 0%, #fbfcff 52%, #ffffff 100%) padding-box,
+                linear-gradient(110deg, #a9e4ca 0%, #b9d3f4 27%, #d0c3f1 53%, #efc9df 77%, #c3cfdb 100%) border-box;
+            box-shadow:
+                0 20px 46px rgba(37,40,54,0.10),
+                0 5px 14px rgba(72,82,124,0.06),
+                0 0 24px rgba(132,119,188,0.07),
+                inset 0 1px 0 rgba(255,255,255,0.98);
+        }
+        #mainTitle {
+            background: none !important;
+            color: #282a31 !important;
+            -webkit-text-fill-color: #282a31 !important;
+        }
+        #zoneFilterPanel {
+            max-width: 1040px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 14px 16px;
+            border: 1px solid #e7e8ed;
+            border-radius: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+            box-shadow: 0 8px 24px rgba(34,36,47,0.065), inset 0 1px 0 rgba(255,255,255,0.98);
+        }
+        #zoneFilterPanel::before {
+            content: "เลือกโซนเคส";
+            flex-basis: 100%;
+            margin: 0 4px 2px;
+            color: #737681;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-align: left;
+        }
+        button.zone-btn {
+            background: linear-gradient(180deg, #ffffff 0%, #f5f6f8 100%) !important;
+            border: 1px solid #e1e3e8 !important;
+            color: #52555e !important;
+            box-shadow: 0 2px 6px rgba(34,36,47,0.055), inset 0 1px 0 rgba(255,255,255,0.98);
+            transition: background 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+        }
+        button.zone-btn:hover {
+            background: #eef0f3 !important;
+            color: #30323a !important;
+        }
+        button.zone-btn.bg-black {
+            background: linear-gradient(110deg, #26282f 0%, #41444e 100%) !important;
+            color: #fff !important;
+            border-color: transparent !important;
+            box-shadow: 0 5px 12px rgba(31,33,41,0.2), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .zone-dashboard-section {
+            padding: clamp(12px, 2vw, 22px);
+            border: 1px solid #e7e8ed;
+            border-radius: 26px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(250,251,252,0.98) 100%);
+            box-shadow: 0 12px 32px rgba(34,36,47,0.065), 0 2px 6px rgba(34,36,47,0.025), inset 0 1px 0 rgba(255,255,255,0.98);
+        }
+        .apple-card {
+            background: #fff !important;
+            border-color: #e5e7eb !important;
+            box-shadow: 0 8px 20px rgba(33,35,44,0.075), 0 1px 3px rgba(33,35,44,0.035), inset 0 1px 0 rgba(255,255,255,0.98) !important;
+            transition: box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+        .apple-card:hover {
+            box-shadow: 0 12px 27px rgba(33,35,44,0.10), 0 2px 5px rgba(33,35,44,0.045), inset 0 1px 0 rgba(255,255,255,0.98) !important;
+        }
+        .apple-card .aspect-square {
+            background: linear-gradient(180deg, #f4f5f7 0%, #ffffff 42%, #ffffff 100%) !important;
+        }
+        .apple-card button.bg-slate-700 {
+            background: linear-gradient(105deg, #30323a 0%, #494d5c 70%, #5b6191 100%) !important;
+            box-shadow: 0 4px 10px rgba(47,50,68,0.17), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .apple-card button.bg-slate-700:hover { filter: brightness(1.08); }
+        #floatingBar {
+            background: linear-gradient(110deg, #24262d 0%, #343741 60%, #454b5a 100%) !important;
+            border-color: rgba(255,255,255,0.15) !important;
+            box-shadow: 0 14px 36px rgba(24,26,32,0.26) !important;
+        }
+        #notifyBtn {
+            background: linear-gradient(105deg, #51478f 0%, #5d5d9e 56%, #5c6a9c 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 5px 14px rgba(78,72,143,0.22);
+        }
+        #notifyBtn, #notifyBtn i { color: #fff !important; }
+        #adminPanel, #emptyState {
+            background: linear-gradient(180deg, #fff 0%, #f8f9fb 100%) !important;
+            border-color: #e5e7eb !important;
+            box-shadow: 0 8px 24px rgba(34,36,47,0.065) !important;
+        }
+        @media (max-width: 640px) {
+            #heroPanel { border-radius: 22px; }
+            #zoneFilterPanel { padding: 12px 10px; border-radius: 17px; }
+            .zone-dashboard-section { padding: 10px; border-radius: 20px; }
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
@@ -455,7 +566,7 @@
         </div>
 
         <!-- ZONE Filter Buttons -->
-        <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12 px-1">
+        <div id="zoneFilterPanel" role="navigation" aria-label="เลือกโซนเคส" class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12 px-1">
             <button onclick="filterZone('ALL')" data-zone="ALL" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation">ทั้งหมด</button>
             <button onclick="filterZone('ZONE D')" data-zone="ZONE D" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE D (10)</button>
             <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (11)</button>
@@ -861,7 +972,7 @@
                 totalVisibleCount += zoneCases.length;
 
                 const zoneSection = document.createElement('div');
-                zoneSection.className = "space-y-4";
+                zoneSection.className = "zone-dashboard-section space-y-4";
 
                 const headerStyle = getZoneHeaderColorClass(zoneName);
                 const badgeColor = getZoneBadgeColor(zoneName);
