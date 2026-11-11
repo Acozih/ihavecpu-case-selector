@@ -686,6 +686,133 @@
             opacity: 0.92 !important;
         }
 
+    
+        /* Dribbble-inspired dashboard skin: calm canvas, white modules, charcoal controls, vivid accent. */
+        body {
+            background-color: #eef0f4 !important;
+            background-image: linear-gradient(180deg, #e9edf3 0%, #f5f6f9 46%, #edf0f4 100%) !important;
+            color: #24262d !important;
+        }
+        header.sticky {
+            background: rgba(255,255,255,0.98) !important;
+            border-color: #e4e6eb !important;
+            box-shadow: 0 3px 16px rgba(26,29,36,0.055) !important;
+        }
+        #heroPanel {
+            border: 1px solid transparent !important;
+            border-radius: 20px !important;
+            background:
+                linear-gradient(125deg, #f8f5fc 0%, #fbf9fd 44%, #fff5ef 100%) padding-box,
+                linear-gradient(110deg, #8b5cf6 0%, #b56be5 42%, #ec6c9c 72%, #f97316 100%) border-box !important;
+            box-shadow:
+                0 14px 34px rgba(44,43,57,0.085),
+                0 3px 10px rgba(44,43,57,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.86) !important;
+        }
+        #heroPanel::before {
+            background: linear-gradient(90deg, #8b5cf6 0%, #cf63bc 55%, #f97316 100%) !important;
+            opacity: 0.9 !important;
+        }
+        #mainTitle {
+            background: none !important;
+            color: #22242b !important;
+            -webkit-text-fill-color: #22242b !important;
+        }
+        /* Keep the user's red subtitle and zone-specific heading colors unchanged. */
+        #zoneFilterPanel {
+            max-width: 1040px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 14px 16px;
+            border: 1px solid #e3e5ea !important;
+            border-radius: 18px !important;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+            box-shadow: 0 7px 22px rgba(34,36,47,0.055), inset 0 1px 0 #fff !important;
+        }
+        button.zone-btn {
+            border: 1px solid #e1e3e8 !important;
+            border-radius: 999px !important;
+            background: linear-gradient(180deg, #ffffff 0%, #f5f6f8 100%) !important;
+            color: #51535b !important;
+            box-shadow: 0 2px 6px rgba(34,36,47,0.05) !important;
+        }
+        button.zone-btn:hover {
+            background: #eceef2 !important;
+            color: #262830 !important;
+        }
+        button.zone-btn.bg-black {
+            background: linear-gradient(110deg, #202127 0%, #3a3d46 100%) !important;
+            color: #fff !important;
+            border-color: transparent !important;
+            box-shadow: 0 5px 13px rgba(31,33,41,0.2) !important;
+        }
+        .zone-dashboard-section {
+            border: 1px solid #e1e4e9 !important;
+            border-radius: 22px !important;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+            box-shadow: 0 10px 26px rgba(34,36,47,0.055), 0 2px 5px rgba(34,36,47,0.025) !important;
+        }
+        .apple-card {
+            border: 1px solid #e2e4e9 !important;
+            border-radius: 18px !important;
+            background: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(33,35,44,0.065), 0 1px 3px rgba(33,35,44,0.03) !important;
+            transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease !important;
+        }
+        .apple-card:hover {
+            box-shadow: 0 10px 24px rgba(33,35,44,0.09), 0 2px 5px rgba(33,35,44,0.035) !important;
+        }
+        .apple-card.border-red-600 {
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 2px rgba(220,38,38,0.11), 0 8px 20px rgba(33,35,44,0.07) !important;
+        }
+        .apple-card.border-amber-500 {
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 0 2px rgba(245,158,11,0.13), 0 8px 20px rgba(33,35,44,0.07) !important;
+        }
+        .apple-card .aspect-square {
+            background: linear-gradient(180deg, #f0f2f5 0%, #f8f9fb 45%, #ffffff 100%) !important;
+        }
+        .apple-card button.bg-slate-700 {
+            background: linear-gradient(110deg, #24262d 0%, #454852 100%) !important;
+            box-shadow: 0 4px 10px rgba(34,36,47,0.17) !important;
+        }
+        .apple-card button.bg-slate-700:hover { filter: brightness(1.12); }
+        #floatingBar {
+            background: linear-gradient(110deg, #202127 0%, #353841 100%) !important;
+            border-color: rgba(255,255,255,0.16) !important;
+            box-shadow: 0 13px 34px rgba(24,26,32,0.24) !important;
+        }
+        #notifyBtn {
+            background: linear-gradient(105deg, #8055e8 0%, #c452b7 54%, #f07837 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 5px 14px rgba(132,77,183,0.25) !important;
+        }
+        #notifyBtn, #notifyBtn i { color: #ffffff !important; }
+        #adminPanel, #emptyState {
+            border-color: #e2e4e9 !important;
+            background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+            box-shadow: 0 8px 22px rgba(34,36,47,0.06) !important;
+        }
+        input, select, textarea { border-color: #dfe2e8 !important; }
+        input:focus, select:focus, textarea:focus {
+            --tw-ring-color: #8b5cf6 !important;
+            border-color: #8b5cf6 !important;
+        }
+        #backToTopBtn {
+            border-color: rgba(255,255,255,0.2) !important;
+            background: linear-gradient(145deg, #353841 0%, #202127 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 8px 22px rgba(30,33,41,0.25), inset 0 1px 0 rgba(255,255,255,0.14) !important;
+        }
+        #backToTopBtn:hover { background: linear-gradient(145deg, #454852 0%, #2b2d34 100%) !important; }
+        @media (max-width: 640px) {
+            #heroPanel { border-radius: 18px !important; }
+            #zoneFilterPanel { padding: 12px 10px; border-radius: 16px !important; }
+            .zone-dashboard-section { border-radius: 18px !important; }
+            .apple-card { border-radius: 15px !important; }
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
