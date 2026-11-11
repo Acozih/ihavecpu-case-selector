@@ -570,6 +570,89 @@
             }
         }
 
+    
+        /* Pastel violet-to-pink frame system requested by the user. */
+        #heroPanel {
+            background:
+                linear-gradient(135deg, #ffffff 0%, #fcfaff 52%, #fffafd 100%) padding-box,
+                linear-gradient(110deg, #d9ccf3 0%, #e5d9f6 42%, #f2ddeb 76%, #f7e7f0 100%) border-box !important;
+            box-shadow:
+                0 20px 46px rgba(75,58,104,0.085),
+                0 5px 14px rgba(121,86,135,0.055),
+                0 0 24px rgba(215,190,234,0.11),
+                inset 0 1px 0 rgba(255,255,255,0.98) !important;
+        }
+        #heroPanel::before {
+            background: linear-gradient(90deg, #cbb9ec 0%, #e1d2f3 48%, #f3d8e7 100%) !important;
+            opacity: 0.95 !important;
+        }
+        #zoneFilterPanel {
+            border: 1px solid transparent !important;
+            background:
+                linear-gradient(180deg, #ffffff 0%, #fdfbff 100%) padding-box,
+                linear-gradient(110deg, #e0d5f4 0%, #f2dfed 100%) border-box !important;
+        }
+        button.zone-btn {
+            border-color: #e6daf3 !important;
+            background: linear-gradient(135deg, #ffffff 0%, #fdfaff 100%) !important;
+        }
+        button.zone-btn.bg-black {
+            border-color: transparent !important;
+            background: linear-gradient(110deg, #282832 0%, #484451 100%) !important;
+            color: #fff !important;
+        }
+        .zone-dashboard-section {
+            border: 1px solid transparent !important;
+            background:
+                linear-gradient(180deg, #ffffff 0%, #fdfcff 100%) padding-box,
+                linear-gradient(120deg, #e2d8f3 0%, #f3e0ed 100%) border-box !important;
+        }
+        .apple-card {
+            border: 1px solid transparent !important;
+            background:
+                linear-gradient(145deg, #ffffff 0%, #fffefe 100%) padding-box,
+                linear-gradient(125deg, #e4daf4 0%, #f4e0ed 100%) border-box !important;
+        }
+        #adminPanel, #emptyState {
+            border: 1px solid transparent !important;
+            background:
+                linear-gradient(180deg, #ffffff 0%, #fdfbff 100%) padding-box,
+                linear-gradient(115deg, #e2d8f3 0%, #f3e0ed 100%) border-box !important;
+        }
+        #backToTopBtn {
+            border: 1px solid rgba(190,166,218,0.68) !important;
+            background: linear-gradient(135deg, #ded2f2 0%, #f4dce9 100%) !important;
+            color: #51435f !important;
+            box-shadow: 0 8px 22px rgba(85,61,111,0.2), inset 0 1px 0 rgba(255,255,255,0.82) !important;
+        }
+        #backToTopBtn:hover {
+            background: linear-gradient(135deg, #d4c3ee 0%, #efcfdf 100%) !important;
+        }
+        #backToTopBtn:focus-visible { outline-color: rgba(167,132,201,0.55) !important; }
+
+        /* Hide the horizontal scrollbar under the thumbnail gallery (keep touch/trackpad swipe). */
+        #zonesContainer .apple-card .case-thumbnails {
+            border: 0 !important;
+            box-shadow: none !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+            overscroll-behavior-x: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+        #zonesContainer .apple-card .case-thumbnails::-webkit-scrollbar,
+        #zonesContainer .apple-card .case-thumbnails::-webkit-scrollbar-thumb,
+        #zonesContainer .apple-card .case-thumbnails::-webkit-scrollbar-track {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+        }
+        #zonesContainer .apple-card .case-thumbnails + .case-details {
+            border-top: 0 !important;
+            box-shadow: none !important;
+            margin-top: 0 !important;
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
