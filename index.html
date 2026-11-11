@@ -390,6 +390,61 @@
         }
 
     
+        /* Monochrome hero frame and accessible floating back-to-top control. */
+        #heroPanel {
+            background:
+                linear-gradient(135deg, #ffffff 0%, #fbfbfc 52%, #ffffff 100%) padding-box,
+                linear-gradient(110deg, #4b5563 0%, #7b818c 28%, #d1d5db 58%, #9ca3af 80%, #525965 100%) border-box !important;
+            box-shadow:
+                0 20px 46px rgba(37,40,54,0.10),
+                0 5px 14px rgba(72,82,124,0.06),
+                0 0 24px rgba(100,108,122,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.98) !important;
+        }
+        #heroPanel::before {
+            background: linear-gradient(90deg, #4b5563 0%, #9ca3af 52%, #e5e7eb 100%) !important;
+            opacity: 0.92 !important;
+        }
+        #backToTopBtn {
+            position: fixed;
+            right: 18px;
+            bottom: calc(18px + env(safe-area-inset-bottom));
+            z-index: 60;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 17px;
+            background: linear-gradient(145deg, #555b66 0%, #252932 100%);
+            color: #fff;
+            box-shadow: 0 8px 22px rgba(30,33,41,0.27), inset 0 1px 0 rgba(255,255,255,0.2);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px) scale(0.94);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, bottom 180ms ease;
+            cursor: pointer;
+        }
+        #backToTopBtn.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        #backToTopBtn:hover { background: linear-gradient(145deg, #6b7280 0%, #353a44 100%); }
+        #backToTopBtn:active { transform: translateY(1px) scale(0.94); }
+        #backToTopBtn:focus-visible { outline: 3px solid rgba(107,114,128,0.42); outline-offset: 3px; }
+        #backToTopBtn.above-floating-bar { bottom: calc(120px + env(safe-area-inset-bottom)); }
+        @media (max-width: 640px) {
+            #backToTopBtn { right: 14px; width: 46px; height: 46px; border-radius: 15px; }
+            #backToTopBtn.above-floating-bar { bottom: calc(154px + env(safe-area-inset-bottom)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #backToTopBtn { transition: none; }
+        }
+
         /* Behance dashboard-inspired layout: quiet canvas, modular white cards, soft shadows and restrained dark controls. */
         body {
             background-color: #f3f4f7 !important;
@@ -500,6 +555,21 @@
             .zone-dashboard-section { padding: 10px; border-radius: 20px; }
         }
 
+    
+        /* Remove the separator around the image-thumbnail/name boundary on phone-sized screens only. */
+        @media (max-width: 640px) {
+            #zonesContainer .apple-card .case-thumbnails {
+                border-top: 0 !important;
+                border-bottom: 0 !important;
+                box-shadow: none !important;
+            }
+            #zonesContainer .apple-card .case-thumbnails + .case-details {
+                border-top: 0 !important;
+                box-shadow: none !important;
+                margin-top: 0 !important;
+            }
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
@@ -607,6 +677,14 @@
             </button>
         </div>
     </div>
+
+    <!-- Back-to-top button: appears after scrolling down -->
+    <button id="backToTopBtn" type="button" aria-label="เลื่อนกลับไปด้านบนสุด" title="กลับไปด้านบนสุด">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m18 15-6-6-6 6"></path>
+            <path d="M12 9v11"></path>
+        </svg>
+    </button>
 
     <!-- Image Zoom Modal (พื้นหลังสีขาว) -->
     <div id="imageZoomModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6" onclick="closeImageZoom()">
@@ -1066,7 +1144,7 @@
 
                     let thumbnailsHtml = '';
                     if (imgList.length > 1) {
-                        thumbnailsHtml = `<div class="flex items-center justify-center gap-1.5 p-1.5 sm:p-2 bg-slate-50 border-t border-slate-100 overflow-x-auto">`;
+                        thumbnailsHtml = `<div class="case-thumbnails flex items-center justify-center gap-1.5 p-1.5 sm:p-2 bg-slate-50 border-t border-slate-100 overflow-x-auto">`;
                         imgList.forEach((imgUrl, imgIdx) => {
                             thumbnailsHtml += `
                                 <button onclick="event.stopPropagation(); setMainImage('${c.id}', ${imgIdx})" class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden border-2 transition flex-shrink-0 ${imgIdx === 0 ? 'border-blue-600 scale-105 shadow-sm' : 'border-slate-200 opacity-60 hover:opacity-100'}" id="thumb-${c.id}-${imgIdx}">
@@ -1110,7 +1188,7 @@
 
                                 ${thumbnailsHtml}
 
-                                <div class="p-2.5 sm:p-5">
+                                <div class="case-details p-2.5 sm:p-5">
                                     <h3 class="text-[11px] sm:text-sm font-bold text-slate-900 mb-2 sm:mb-3 break-words leading-snug" title="${c.name}">${c.name}</h3>
                                     <div class="space-y-0.5 sm:space-y-1 border-t border-slate-100 pt-1.5 sm:pt-2">
                                         <div class="flex items-center justify-between text-[10px] sm:text-[11px] py-0.5">
@@ -1315,6 +1393,7 @@
                 `;
                 bar.classList.add('translate-y-48', 'opacity-0');
             }
+            if (typeof syncBackToTopButton === 'function') syncBackToTopButton();
         }
 
         function clearSelection() {
@@ -1604,6 +1683,25 @@
             setTimeout(() => {
                 toast.classList.add('translate-y-16', 'opacity-0');
             }, 3000);
+        }
+
+        const backToTopButton = document.getElementById('backToTopBtn');
+        function syncBackToTopButton() {
+            if (!backToTopButton) return;
+            backToTopButton.classList.toggle('is-visible', window.scrollY > 320);
+            backToTopButton.classList.toggle('above-floating-bar', selectedCaseIds.length > 0);
+        }
+        if (backToTopButton) {
+            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            let backToTopScrollQueued = false;
+            window.addEventListener('scroll', () => {
+                if (backToTopScrollQueued) return;
+                backToTopScrollQueued = true;
+                requestAnimationFrame(() => {
+                    syncBackToTopButton();
+                    backToTopScrollQueued = false;
+                });
+            }, { passive: true });
         }
 
         // Initialize App
