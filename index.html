@@ -286,7 +286,65 @@
             outline-offset: 2px;
         }
 
-</style>
+
+        /* Match each zone section heading with its established zone color. */
+        #zonesContainer > div > [data-zone-header="ZONE D"] {
+            background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%) !important;
+            border-color: #6ee7b7 !important;
+            box-shadow: 0 4px 14px rgba(5,150,105,0.11) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE D"] > div:first-child > span {
+            background: linear-gradient(110deg, #059669, #047857) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.75) !important;
+            box-shadow: 0 3px 9px rgba(5,150,105,0.22) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE C"] {
+            background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%) !important;
+            border-color: #93c5fd !important;
+            box-shadow: 0 4px 14px rgba(37,99,235,0.11) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE C"] > div:first-child > span {
+            background: linear-gradient(110deg, #3b82f6, #2563eb) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.75) !important;
+            box-shadow: 0 3px 9px rgba(37,99,235,0.2) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE A"] {
+            background: linear-gradient(180deg, #faf5ff 0%, #ede9fe 100%) !important;
+            border-color: #c4b5fd !important;
+            box-shadow: 0 4px 14px rgba(124,58,237,0.11) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE A"] > div:first-child > span {
+            background: linear-gradient(110deg, #8b5cf6, #7c3aed) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.75) !important;
+            box-shadow: 0 3px 9px rgba(124,58,237,0.2) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE B"] {
+            background: linear-gradient(180deg, #fdf2f8 0%, #fce7f3 100%) !important;
+            border-color: #f9a8d4 !important;
+            box-shadow: 0 4px 14px rgba(219,39,119,0.1) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE B"] > div:first-child > span {
+            background: linear-gradient(110deg, #ec4899, #db2777) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.75) !important;
+            box-shadow: 0 3px 9px rgba(219,39,119,0.2) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE PREMIUM"] {
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            border-color: #cbd5e1 !important;
+            box-shadow: 0 4px 14px rgba(100,116,139,0.13) !important;
+        }
+        #zonesContainer > div > [data-zone-header="ZONE PREMIUM"] > div:first-child > span {
+            background: linear-gradient(110deg, #cbd5e1 0%, #f8fafc 48%, #94a3b8 100%) !important;
+            color: #334155 !important;
+            border-color: #cbd5e1 !important;
+            box-shadow: 0 3px 9px rgba(100,116,139,0.18) !important;
+        }
+
+    </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
 
@@ -764,7 +822,7 @@
                 const badgeColor = getZoneBadgeColor(zoneName);
 
                 let sectionHeaderHtml = `
-                    <div class="flex items-center justify-between pb-3 border-b-2 ${headerStyle} px-4 py-3 rounded-2xl">
+                    <div data-zone-header="${zoneName}" class="flex items-center justify-between pb-3 border-b-2 ${headerStyle} px-4 py-3 rounded-2xl">
                         <div class="flex items-center gap-2.5">
                             <span class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider shadow-xs ${badgeColor}">${zoneName}</span>
                         </div>
