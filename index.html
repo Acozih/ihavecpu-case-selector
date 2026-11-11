@@ -592,7 +592,7 @@
                             </div>
                             <div class="p-2.5 sm:p-5 pt-0">
                                 <button onclick="${actionOnClick}" ${c.isSoldOut ? 'disabled' : ''} class="w-full py-2 sm:py-2.5 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 ${btnClass}">
-                                    <i data-lucide="${iconName}" class="w-3.5 h-3.5"></i>
+                                    ${c.isSoldOut ? '' : `<i data-lucide="${iconName}" class="w-3.5 h-3.5"></i>`}
                                     ${btnText}
                                 </button>
                             </div>
