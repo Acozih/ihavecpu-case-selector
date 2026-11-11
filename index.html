@@ -889,6 +889,24 @@
             }
         }
 
+    
+        /* Zone-colored shadow is limited to each zone's own heading strip. */
+        #zonesContainer [data-zone-header="ZONE D"] {
+            box-shadow: 0 6px 15px rgba(16,185,129,0.20), 0 1px 4px rgba(16,185,129,0.11) !important;
+        }
+        #zonesContainer [data-zone-header="ZONE C"] {
+            box-shadow: 0 6px 15px rgba(59,130,246,0.20), 0 1px 4px rgba(59,130,246,0.11) !important;
+        }
+        #zonesContainer [data-zone-header="ZONE A"] {
+            box-shadow: 0 6px 15px rgba(139,92,246,0.20), 0 1px 4px rgba(139,92,246,0.11) !important;
+        }
+        #zonesContainer [data-zone-header="ZONE B"] {
+            box-shadow: 0 6px 15px rgba(236,72,153,0.20), 0 1px 4px rgba(236,72,153,0.11) !important;
+        }
+        #zonesContainer [data-zone-header="ZONE PREMIUM"] {
+            box-shadow: 0 6px 15px rgba(100,116,139,0.19), 0 1px 4px rgba(100,116,139,0.10) !important;
+        }
+
     </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
