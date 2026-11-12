@@ -1232,6 +1232,19 @@
     }
 </style>
 
+
+<style>
+    @media (max-width: 640px) {
+        #zoneQuickMenu {
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, bottom 180ms ease;
+        }
+        #zoneQuickMenu.above-floating-bar {
+            bottom: calc(154px + env(safe-area-inset-bottom, 0px));
+        }
+    }
+</style>
+
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
 
@@ -2505,6 +2518,14 @@
     window.addEventListener('scroll', updateVisibility, { passive: true });
     window.addEventListener('resize', updateVisibility, { passive: true });
     window.addEventListener('pageshow', updateVisibility);
+    const backToTop = document.getElementById('backToTopBtn');
+    const syncVerticalPosition = () => {
+        if (backToTop) menu.classList.toggle('above-floating-bar', backToTop.classList.contains('above-floating-bar'));
+    };
+    if (backToTop && window.MutationObserver) {
+        new MutationObserver(syncVerticalPosition).observe(backToTop, { attributes: true, attributeFilter: ['class'] });
+    }
+    syncVerticalPosition();
     setActive(typeof currentFilterZone !== 'undefined' ? currentFilterZone : 'ALL');
     updateVisibility();
 })();
