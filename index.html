@@ -179,17 +179,15 @@
             box-shadow: inset 0 0 8px rgba(255,255,255,0.32), 0 0 5px rgba(255,255,255,0.4);
             transform: translate(-50%, -50%) scale(0.15);
             opacity: 0;
-            animation: case-water-ripple 0.68s cubic-bezier(0.12,0.62,0.28,1) forwards;
+            animation: case-water-ripple 0.30s cubic-bezier(0.22,0.61,0.36,1) forwards;
         }
-        .case-water-wave:nth-child(2) { animation-delay: 0.10s; }
-        .case-water-wave:nth-child(3) { animation-delay: 0.20s; }
         @keyframes case-water-ripple {
-            0% { transform: translate(-50%, -50%) scale(0.15); opacity: 0.92; }
-            70% { opacity: 0.48; }
-            100% { transform: translate(-50%, -50%) scale(3.08); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(0.15); opacity: 0.72; }
+            70% { opacity: 0.32; }
+            100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .case-water-wave { animation-duration: 0.01ms; animation-delay: 0ms; }
+            .case-water-wave { animation: none !important; }
         }
 
         /* Reference-inspired light dashboard skin: white surfaces, soft neutral shadows, restrained charcoal/indigo accents. */
@@ -1613,6 +1611,72 @@
         #zonesContainer .apple-card:hover .product-image { transform: none !important; }
         #zonesContainer .case-select-button.is-pressing { animation: none !important; }
     }
+        /* Calm micro-interactions: state first, short motion second. */
+        #zonesContainer .apple-card {
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease !important;
+        }
+        #zonesContainer .case-select-button {
+            transition: transform 140ms cubic-bezier(0.22,0.61,0.36,1), background-color 180ms ease, color 140ms ease, border-color 180ms ease, box-shadow 180ms ease !important;
+        }
+        #zonesContainer .case-select-button.is-pressing {
+            animation: case-button-press-calm 140ms cubic-bezier(0.22,0.61,0.36,1) both !important;
+        }
+        #zonesContainer .case-select-button svg {
+            animation: case-selection-icon-in 160ms cubic-bezier(0.22,0.61,0.36,1) both;
+        }
+        @keyframes case-selection-icon-in {
+            0% { opacity: 0; transform: scale(0.82); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .case-water-wave {
+            animation: case-water-ripple 300ms cubic-bezier(0.22,0.61,0.36,1) both !important;
+        }
+        #floatingBar {
+            transition: transform 240ms cubic-bezier(0.22,1,0.36,1), opacity 180ms ease !important;
+        }
+        #selectedCount.selection-count-pop {
+            animation: selected-count-pop 160ms cubic-bezier(0.22,0.61,0.36,1) both;
+        }
+        @keyframes selected-count-pop {
+            0% { transform: scale(1); }
+            45% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+        .selected-case-row-enter {
+            animation: selected-case-row-enter 150ms ease-out both;
+        }
+        @keyframes selected-case-row-enter {
+            0% { opacity: 0; transform: translateY(4px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        #checkoutModal {
+            opacity: 0;
+            transition: opacity 190ms ease-out !important;
+        }
+        #checkoutModal.is-visible { opacity: 1; }
+        #checkoutModal > div {
+            opacity: 0;
+            transform: translateY(8px) scale(0.985);
+            transition: opacity 190ms ease-out, transform 210ms cubic-bezier(0.22,1,0.36,1) !important;
+        }
+        #checkoutModal.is-visible > div { opacity: 1; transform: translateY(0) scale(1); }
+        #checkoutModal.is-closing { opacity: 0; transition-duration: 140ms !important; }
+        #checkoutModal.is-closing > div {
+            opacity: 0;
+            transform: translateY(5px) scale(0.99);
+            transition-duration: 140ms !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .case-water-wave,
+            #zonesContainer .case-select-button svg,
+            #selectedCount.selection-count-pop,
+            .selected-case-row-enter { animation: none !important; }
+            #floatingBar,
+            #checkoutModal,
+            #checkoutModal > div { transition: none !important; }
+            #checkoutModal,
+            #checkoutModal > div { opacity: 1 !important; transform: none !important; }
+        }
 </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
@@ -1703,7 +1767,7 @@
     </main>
 
     <!-- Floating Selection Bar -->
-    <div id="floatingBar" class="fixed bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 w-[94%] sm:w-11/12 max-w-4xl bg-slate-900/95 backdrop-blur-md text-white p-3 sm:p-4 rounded-2xl shadow-2xl z-50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between transition-all duration-300 translate-y-48 opacity-0 border border-slate-700 gap-3">
+    <div id="floatingBar" class="fixed bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 w-[94%] sm:w-11/12 max-w-4xl bg-slate-900/95 backdrop-blur-md text-white p-3 sm:p-4 rounded-2xl shadow-2xl z-50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between transition-all duration-300 translate-y-4 opacity-0 border border-slate-700 gap-3">
         
         <div class="flex items-start sm:items-center space-x-3 min-w-0 flex-grow">
             <div class="bg-blue-600 text-white w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm shadow-inner flex-shrink-0 mt-0.5 sm:mt-0" id="selectedCount">0</div>
@@ -2458,36 +2522,36 @@
 
         function handleCaseButtonClick(id, event) {
             const button = event && event.currentTarget;
-            if (!button || button.disabled) return;
-            const rect = button.getBoundingClientRect();
-            const overlay = document.createElement('div');
-            overlay.className = 'case-water-ripple-overlay';
-            overlay.style.left = `${rect.left}px`;
-            overlay.style.top = `${rect.top}px`;
-            overlay.style.width = `${rect.width}px`;
-            overlay.style.height = `${rect.height}px`;
+            if (!button || button.disabled || button.classList.contains('is-pressing')) return;
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            const x = Math.max(0, Math.min(rect.width, (event.clientX || (rect.left + rect.width / 2)) - rect.left));
-            const y = Math.max(0, Math.min(rect.height, (event.clientY || (rect.top + rect.height / 2)) - rect.top));
-            for (let i = 0; i < 3; i++) {
+            if (!prefersReducedMotion) {
+                const rect = button.getBoundingClientRect();
+                const overlay = document.createElement('div');
+                overlay.className = 'case-water-ripple-overlay';
+                overlay.style.left = `${rect.left}px`;
+                overlay.style.top = `${rect.top}px`;
+                overlay.style.width = `${rect.width}px`;
+                overlay.style.height = `${rect.height}px`;
+
+                const clientX = event && Number.isFinite(event.clientX) && event.clientX !== 0 ? event.clientX : rect.left + rect.width / 2;
+                const clientY = event && Number.isFinite(event.clientY) && event.clientY !== 0 ? event.clientY : rect.top + rect.height / 2;
                 const wave = document.createElement('span');
                 wave.className = 'case-water-wave';
-                wave.style.left = `${x}px`;
-                wave.style.top = `${y}px`;
+                wave.style.left = `${Math.max(0, Math.min(rect.width, clientX - rect.left))}px`;
+                wave.style.top = `${Math.max(0, Math.min(rect.height, clientY - rect.top))}px`;
                 overlay.appendChild(wave);
-            }
-            document.body.appendChild(overlay);
-            window.setTimeout(() => overlay.remove(), 920);
+                document.body.appendChild(overlay);
+                window.setTimeout(() => overlay.remove(), 320);
 
-            // Keep the pressed state visible until the 324ms press animation completes.
-            button.classList.add('is-pressing');
-            button.disabled = true;
-            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const pressDuration = prefersReducedMotion ? 150 : 324;
-            window.setTimeout(() => {
-                button.classList.remove('is-pressing');
-                toggleSelectCase(id);
-            }, pressDuration);
+                button.classList.add('is-pressing');
+                window.setTimeout(() => {
+                    if (button.isConnected) button.classList.remove('is-pressing');
+                }, 150);
+            }
+
+            // Update selection immediately; motion now runs in parallel with the UI response.
+            toggleSelectCase(id);
         }
 
         function syncSelectedCaseCards(caseIds) {
@@ -2563,7 +2627,10 @@
             syncSelectedCaseCards(affectedIds);
             updateFloatingBar();
             if (shouldOpenCheckout) {
-                openCheckoutModal();
+                const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.setTimeout(() => {
+                    if (selectedCaseIds.length === 2) openCheckoutModal();
+                }, prefersReducedMotion ? 0 : 100);
             }
         }
 
@@ -2572,7 +2639,14 @@
             const countEl = document.getElementById('selectedCount');
             const container = document.getElementById('selectedNamesContainer');
 
-            countEl.innerText = selectedCaseIds.length;
+            const nextCount = String(selectedCaseIds.length);
+            const countChanged = countEl.innerText !== nextCount;
+            countEl.innerText = nextCount;
+            if (countChanged && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+                countEl.classList.remove('selection-count-pop');
+                void countEl.offsetWidth;
+                countEl.classList.add('selection-count-pop');
+            }
 
             if (selectedCaseIds.length > 0) {
                 let html = '<p class="text-[10px] sm:text-xs text-slate-400 font-medium leading-none mb-1">เคสที่คุณเลือก</p>';
@@ -2584,7 +2658,7 @@
                         const badgeColor = idx === 0 ? 'bg-red-500/20 text-red-300 border-red-500/40' : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
                         
                         html += `
-                            <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-white leading-tight">
+                            <div class="selected-case-row-enter flex items-center gap-2 text-xs sm:text-sm font-semibold text-white leading-tight">
                                 <span class="px-1.5 py-0.5 rounded text-[10px] font-bold border ${badgeColor}">${label}</span>
                                 <span class="break-words">${found.name}</span>
                             </div>
@@ -2593,13 +2667,13 @@
                 });
 
                 container.innerHTML = html;
-                bar.classList.remove('translate-y-48', 'opacity-0');
+                bar.classList.remove('translate-y-4', 'opacity-0');
             } else {
                 container.innerHTML = `
                     <p class="text-[10px] sm:text-xs text-slate-400 font-medium leading-none">เคสที่คุณเลือก</p>
                     <p class="text-xs sm:text-sm font-bold text-slate-400">ยังไม่ได้เลือกเคส</p>
                 `;
-                bar.classList.add('translate-y-48', 'opacity-0');
+                bar.classList.add('translate-y-4', 'opacity-0');
             }
             if (typeof syncBackToTopButton === 'function') syncBackToTopButton();
         }
@@ -2611,10 +2685,16 @@
             showToast('ล้างรายการที่เลือกแล้ว');
         }
 
+        let checkoutModalCloseTimer = null;
+
         function openCheckoutModal() {
             if (selectedCaseIds.length === 0) {
                 showToast('กรุณาเลือกเคสอย่างน้อย 1 รายการครับ');
                 return;
+            }
+            if (checkoutModalCloseTimer !== null) {
+                window.clearTimeout(checkoutModalCloseTimer);
+                checkoutModalCloseTimer = null;
             }
             let textOutput = "";
             selectedCaseIds.forEach((id, idx) => {
@@ -2630,14 +2710,39 @@
                 }
             });
             document.getElementById('checkoutSummaryText').value = textOutput.trim();
-            document.getElementById('checkoutModal').classList.remove('hidden');
-            document.getElementById('checkoutModal').classList.add('flex');
+            const modal = document.getElementById('checkoutModal');
+            modal.classList.remove('hidden', 'is-closing', 'is-visible');
+            modal.classList.add('flex');
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                modal.classList.add('is-visible');
+            } else {
+                window.requestAnimationFrame(() => {
+                    if (modal.classList.contains('flex')) modal.classList.add('is-visible');
+                });
+            }
             lucide.createIcons();
         }
 
         function closeCheckoutModal() {
-            document.getElementById('checkoutModal').classList.add('hidden');
-            document.getElementById('checkoutModal').classList.remove('flex');
+            const modal = document.getElementById('checkoutModal');
+            if (!modal.classList.contains('flex')) return;
+            modal.classList.remove('is-visible');
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex', 'is-closing');
+                return;
+            }
+            modal.classList.add('is-closing');
+            if (checkoutModalCloseTimer !== null) window.clearTimeout(checkoutModalCloseTimer);
+            checkoutModalCloseTimer = window.setTimeout(() => {
+                if (modal.classList.contains('is-closing')) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex', 'is-closing');
+                }
+                checkoutModalCloseTimer = null;
+            }, 150);
         }
 
         function copySummaryText() {
