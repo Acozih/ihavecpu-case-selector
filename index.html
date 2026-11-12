@@ -1148,8 +1148,28 @@
         pointer-events: auto;
         transform: translate3d(0,-50%,0);
     }
-    #zoneQuickMenu .zone-quick-toggle { display: none; }
-    #zoneQuickList { display: flex; flex-direction: column; gap: 5px; }
+    #zoneQuickMenu .zone-quick-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-height: 38px;
+        padding: 0 10px;
+        border: 1px solid rgba(255,255,255,0.72);
+        border-radius: 12px;
+        background: #30323a;
+        color: #fff;
+        box-shadow: 0 5px 14px rgba(24,26,34,0.20);
+        font: 700 12px/1 system-ui, sans-serif;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: background-color 140ms ease, transform 140ms ease;
+    }
+    #zoneQuickMenu .zone-quick-toggle:hover { background: #1f2026; }
+    #zoneQuickMenu .zone-quick-toggle svg { width: 15px; height: 15px; transition: transform 160ms ease; }
+    #zoneQuickMenu.is-open .zone-quick-toggle svg { transform: rotate(90deg); }
+    #zoneQuickList { display: none; flex-direction: column; gap: 5px; }
+    #zoneQuickMenu.is-open #zoneQuickList { display: flex; }
     .zone-quick-link {
         --zone-accent: #64748b;
         display: flex;
@@ -1176,7 +1196,7 @@
     .zone-quick-link[data-zone="ZONE A"] { --zone-accent: #7c3aed; }
     .zone-quick-link[data-zone="ZONE B"] { --zone-accent: #db2777; }
     .zone-quick-link[data-zone="ZONE PREMIUM"] { --zone-accent: #64748b; }
-    .zone-quick-link[data-zone="ZONE ITX"] { --zone-accent: #198686; }
+    .zone-quick-link[data-zone="ZONE ITX"] { --zone-accent: #FFD700; }
     .zone-quick-link[data-zone="ALL"] { --zone-accent: #30323a; }
     .zone-quick-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--zone-accent); }
     @media (max-width: 640px) {
