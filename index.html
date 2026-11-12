@@ -1268,16 +1268,30 @@
 
 
 <style>
-    #zonesContainer [data-zone-header="ZONE ITX"] {
+    #zonesContainer [data-zone-header="ZONE ITX"],
+    #zonesContainer .zone-itx-gold-header {
         color: #6B4F00 !important;
         border-color: #FFD700 !important;
         background: linear-gradient(110deg, rgba(255,215,0,0.22) 0%, rgba(212,175,55,0.10) 38%, rgba(255,241,168,0.62) 52%, rgba(255,215,0,0.13) 68%, rgba(255,255,255,0.98) 100%) !important;
         box-shadow: 0 7px 22px rgba(212,175,55,0.22), inset 0 1px 0 rgba(255,255,255,0.95) !important;
     }
-    #zonesContainer [data-zone-header="ZONE ITX"] > div:first-child > span {
+    #zonesContainer [data-zone-header="ZONE ITX"] > div:first-child > span,
+    .zone-itx-gold-badge {
         color: #4A3600 !important;
         background: linear-gradient(135deg, #B8860B 0%, #D4AF37 22%, #FFD700 40%, #FFF4B8 50%, #FFD700 60%, #B8860B 100%) !important;
+        border: 1px solid #D4AF37 !important;
+    }
+    #zoneFilterPanel .zone-btn[data-zone="ZONE ITX"] {
+        color: #6B4F00 !important;
         border-color: #D4AF37 !important;
+        background: linear-gradient(110deg, rgba(255,215,0,0.18) 0%, rgba(255,241,168,0.56) 52%, rgba(255,215,0,0.12) 100%) !important;
+        box-shadow: 0 3px 10px rgba(212,175,55,0.12) !important;
+    }
+    #zoneFilterPanel .zone-btn[data-zone="ZONE ITX"].bg-black {
+        color: #4A3600 !important;
+        border-color: #D4AF37 !important;
+        background: linear-gradient(135deg, #B8860B 0%, #D4AF37 22%, #FFD700 40%, #FFF4B8 50%, #FFD700 60%, #B8860B 100%) !important;
+        box-shadow: 0 5px 15px rgba(212,175,55,0.28) !important;
     }
 </style>
 
@@ -1750,7 +1764,7 @@
                 case 'ZONE A': return 'bg-purple-600 text-white';
                 case 'ZONE B': return 'bg-pink-600 text-white';
                 case 'ZONE PREMIUM': return 'bg-gradient-to-r from-slate-300 via-gray-100 to-slate-400 text-slate-800 border border-slate-300';
-                case 'ZONE ITX': return 'bg-teal-700 text-white';
+                case 'ZONE ITX': return 'zone-itx-gold-badge';
                 default: return 'bg-slate-700 text-white';
             }
         }
@@ -1762,7 +1776,7 @@
                 case 'ZONE A': return 'text-purple-700 border-purple-200 bg-purple-50/50';
                 case 'ZONE B': return 'text-pink-700 border-pink-200 bg-pink-50/50';
                 case 'ZONE PREMIUM': return 'text-slate-700 border-slate-300 bg-gradient-to-r from-slate-100 via-white to-slate-200';
-                case 'ZONE ITX': return 'text-teal-800 border-teal-200 bg-teal-50/50';
+                case 'ZONE ITX': return 'zone-itx-gold-header';
                 default: return 'text-slate-800 border-slate-200 bg-slate-50';
             }
         }
@@ -2563,7 +2577,7 @@
         const zone = button.dataset.zone;
         if (typeof filterZone === 'function') filterZone(zone);
         setActive(zone);
-        setOpen(false);
+        // Keep the current menu state after choosing a zone.
         const target = document.getElementById('zonesContainer');
         if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     });
@@ -2573,12 +2587,7 @@
         const button = event.target.closest('.zone-btn');
         if (button) setActive(button.dataset.zone);
     });
-    document.addEventListener('click', event => {
-        if (!menu.contains(event.target)) setOpen(false);
-    });
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') setOpen(false);
-    });
+
 
     let framePending = false;
     const updateVisibility = () => {
@@ -2586,12 +2595,12 @@
         framePending = true;
         requestAnimationFrame(() => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            // Keep zone navigation available while a specific zone is filtered,
-            // even when filtering a short zone (such as ITX) scrolls near the page top.
+            // Keep the zone filter visible but close its list when the page returns to the top.
+            const atPageTop = scrollTop <= 8;
             const visible = scrollTop > 160 || activeZoneFilter !== 'ALL';
             menu.classList.toggle('is-visible', visible);
             menu.setAttribute('aria-hidden', String(!visible));
-            if (!visible) setOpen(false);
+            if (atPageTop) setOpen(false);
             framePending = false;
         });
     };
