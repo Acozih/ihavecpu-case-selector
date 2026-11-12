@@ -2534,6 +2534,10 @@
         });
     };
 
+    const scrollToZoneResults = () => {
+        const target = document.getElementById('zonesContainer');
+        if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    };
     toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
     list.addEventListener('click', event => {
         const button = event.target.closest('.zone-quick-link');
@@ -2542,14 +2546,16 @@
         if (typeof filterZone === 'function') filterZone(zone);
         setActive(zone);
         setOpen(false);
-        const target = document.getElementById('zonesContainer');
-        if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        scrollToZoneResults();
     });
 
     const topFilters = document.getElementById('zoneFilterPanel');
     if (topFilters) topFilters.addEventListener('click', event => {
         const button = event.target.closest('.zone-btn');
-        if (button) setActive(button.dataset.zone);
+        if (button) {
+            setActive(button.dataset.zone);
+            scrollToZoneResults();
+        }
     });
     document.addEventListener('click', event => {
         if (!menu.contains(event.target)) setOpen(false);
