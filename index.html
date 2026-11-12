@@ -1856,7 +1856,7 @@
                     ` : '';
 
                     let popularBadgeHtml = '';
-                    if (c.isPopular && !c.isSoldOut) {
+                    if ((c.isPopular === true || ['case-d3', 'case-c13', 'case-c14', 'case-c11', 'case-c12', 'case-a8'].includes(c.id)) && !c.isSoldOut) {
                         popularBadgeHtml = `
                             <div class="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 bg-gradient-to-r from-red-600 to-orange-500 text-white text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 sm:px-2 rounded-full uppercase tracking-wider pointer-events-none shadow-sm flex items-center gap-1 border border-orange-300/50">
                                 <i data-lucide="flame" class="w-2.5 h-2.5 fill-white text-white"></i> ยอดนิยม
