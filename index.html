@@ -2524,7 +2524,9 @@
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'ปิดเมนูเลือกโซน' : 'เปิดเมนูเลือกโซน');
     };
+    let activeZoneFilter = 'ALL';
     const setActive = zone => {
+        activeZoneFilter = zone || 'ALL';
         menu.querySelectorAll('.zone-quick-link').forEach(button => {
             const active = button.dataset.zone === zone;
             button.classList.toggle('is-active', active);
@@ -2562,7 +2564,9 @@
         framePending = true;
         requestAnimationFrame(() => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            const visible = scrollTop > 160;
+            // Keep zone navigation available while a specific zone is filtered,
+            // even when filtering a short zone (such as ITX) scrolls near the page top.
+            const visible = scrollTop > 160 || activeZoneFilter !== 'ALL';
             menu.classList.toggle('is-visible', visible);
             menu.setAttribute('aria-hidden', String(!visible));
             if (!visible) setOpen(false);
