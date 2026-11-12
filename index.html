@@ -1684,6 +1684,9 @@
             #checkoutModal,
             #checkoutModal > div { opacity: 1 !important; transform: none !important; }
         }
+        /* Hidden floating bar must not intercept mobile taps; zone controls stay above it. */
+        #floatingBar.opacity-0 { pointer-events: none !important; }
+        #zoneQuickMenu { z-index: 60 !important; }
 </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
