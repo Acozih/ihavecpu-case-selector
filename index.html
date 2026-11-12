@@ -1667,6 +1667,13 @@
             transition-duration: 140ms !important;
         }
         @media (prefers-reduced-motion: reduce) {
+            #zonesContainer .apple-card,
+            #zonesContainer .case-select-button {
+                transition: none !important;
+            }
+            #zonesContainer .apple-card:hover { transform: none !important; }
+            #zonesContainer .apple-card:hover .product-image { transform: none !important; }
+            #zonesContainer .case-select-button.is-pressing,
             .case-water-wave,
             #zonesContainer .case-select-button svg,
             #selectedCount.selection-count-pop,
