@@ -1557,7 +1557,7 @@
             { id: "case-c1", name: "GIGABYTE C102 GLASS (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/54e29e5aa8a665d8d5ec43a34ba81d83/ProductRemoveBg/40213/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/087bc8a3a198e6b9f993a85bf49195c3/ProductRemoveBg/40217/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/dc18790ee3b6d82cfcb06f31b0140264/ProductRemoveBg/40215/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/5453f408c9b017dcf12914578d2a63b5/ProductRemoveBg/40216/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/6aad595cd26a934106e78eae3a12363c/ProductRemoveBg/40214/webp/670"], customFields: {} },
             { id: "case-c2", name: "GIGABYTE C102 GLASS ICE (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/4dde0470d15c99a640805e9e031148d1/ProductRemoveBg/40200/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/d29000f51f12211d3816600f964e6dd3/ProductRemoveBg/40204/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/0d402de2f51a6f041c705422076a4cc0/ProductRemoveBg/40202/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/ceb4a8ea7d00c88bb2a10a6c2ccf7279/ProductRemoveBg/40203/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/2dba095bef949f1ed34afd488c982492/ProductRemoveBg/40201/webp/670"], customFields: {} },
             { id: "case-c3", name: "iHAVECPU G390 V2 (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98330_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98332_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98331_800.jpg"], isPopular: true, customFields: {} },
-            { id: "case-c4", name: "iHAVECPU G390 V2 (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98333_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98335_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98334_800.jpg"], customFields: {} },
+            { id: "case-c4", name: "iHAVECPU G390 V2 (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98333_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98335_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98334_800.jpg"], isSoldOut: true, customFields: {} },
             { id: "case-c5", name: "iHAVECPU IHC 102 WOOD (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83412_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83413_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83414_800.jpg"], customFields: {} },
             { id: "case-c6", name: "iHAVECPU IHC 102 WOOD (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83415_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83416_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83417_800.jpg"], isSoldOut: true, customFields: {} },
             { id: "case-c7", name: "OCYPUS x iHAVECPU GAMMA C52 ARGB (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124188_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124189_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124192_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124193_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124191_800.jpg"], isPopular: true, customFields: {} },
@@ -1673,6 +1673,19 @@
         if (movedMontech15) {
             movedMontech15.zone = 'ZONE PREMIUM';
             movedMontech15.name = 'MONTECH KING 15 PRO (WHITE)(ATX)';
+        }
+        // Apply this requested stock update once to already-saved browser catalogs.
+        // The marker prevents overriding a later intentional Admin change on future loads.
+        const g390SoldOutMigrationKey = 'ihavecpu_migration_case_c4_sold_out_v1';
+        if (!localStorage.getItem(g390SoldOutMigrationKey)) {
+            const g390White = casesData.find(item => item.id === 'case-c4');
+            if (g390White) {
+                g390White.isSoldOut = true;
+                try {
+                    localStorage.setItem('ihavecpu_cases', JSON.stringify(casesData));
+                    localStorage.setItem(g390SoldOutMigrationKey, 'done');
+                } catch (e) {}
+            }
         }
         try { localStorage.setItem('ihavecpu_cases', JSON.stringify(casesData)); } catch(e) {}
         let customFields = JSON.parse(localStorage.getItem('ihavecpu_custom_fields')) || [];
