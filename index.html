@@ -1263,6 +1263,20 @@
         #zoneQuickMenu.above-floating-bar {
             bottom: calc(154px + env(safe-area-inset-bottom, 0px));
         }
+        #zoneFilterPanel {
+            gap: 7px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        #zoneFilterPanel .zone-btn {
+            min-height: 44px;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+        }
+        #zoneQuickList {
+            width: min(150px, calc(100vw - 24px));
+            max-height: min(58vh, 360px);
+        }
     }
 </style>
 
@@ -1389,13 +1403,13 @@
 
         <!-- ZONE Filter Buttons -->
         <div id="zoneFilterPanel" role="navigation" aria-label="เลือกโซนเคส" class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12 px-1">
-            <button onclick="filterZone('ALL')" data-zone="ALL" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation">ทั้งหมด</button>
-            <button onclick="filterZone('ZONE D')" data-zone="ZONE D" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE D (10)</button>
-            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (14)</button>
-            <button onclick="filterZone('ZONE A')" data-zone="ZONE A" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (9)</button>
-            <button onclick="filterZone('ZONE B')" data-zone="ZONE B" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (10)</button>
-            <button onclick="filterZone('ZONE PREMIUM')" data-zone="ZONE PREMIUM" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE PREMIUM (68)</button>
-            <button onclick="filterZone('ZONE ITX')" data-zone="ZONE ITX" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE ITX (1)</button>
+            <button onclick="filterZone('ALL')" data-zone="ALL" aria-pressed="true" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation">ทั้งหมด</button>
+            <button onclick="filterZone('ZONE D')" data-zone="ZONE D" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE D (10)</button>
+            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (14)</button>
+            <button onclick="filterZone('ZONE A')" data-zone="ZONE A" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (9)</button>
+            <button onclick="filterZone('ZONE B')" data-zone="ZONE B" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (10)</button>
+            <button onclick="filterZone('ZONE PREMIUM')" data-zone="ZONE PREMIUM" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE PREMIUM (68)</button>
+            <button onclick="filterZone('ZONE ITX')" data-zone="ZONE ITX" aria-pressed="false" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE ITX (1)</button>
         </div>
 
         <!-- Cases Container (แยกทีละแถว / Section ตาม ZONE) -->
@@ -1779,7 +1793,39 @@
         if (headerTexts.sub === "เลือกได้ 2เคส เคสหลัก และเคสสำรอง เสร็จแล้วแจ้งแอดมินทันที" || headerTexts.sub === "เลือกเคสเสร็จแล้วแจ้งแอดมินทันที") headerTexts.sub = "เลือกได้ 2 เคส | เคสหลัก และเคสสำรอง";
         try { localStorage.setItem('ihavecpu_header', JSON.stringify(headerTexts)); } catch(e) {}
         let selectedCaseIds = [];
-        let currentFilterZone = 'ALL';
+        const validZoneFilters = new Set(['ALL', 'ZONE D', 'ZONE C', 'ZONE A', 'ZONE B', 'ZONE PREMIUM', 'ZONE ITX']);
+
+        function getInitialZoneFilter() {
+            const requestedZone = new URLSearchParams(window.location.search).get('zone');
+            return validZoneFilters.has(requestedZone) ? requestedZone : 'ALL';
+        }
+
+        function syncZoneControls(zone) {
+            document.querySelectorAll('.zone-btn, .zone-quick-link').forEach(button => {
+                const isActive = button.dataset.zone === zone;
+                button.setAttribute('aria-pressed', String(isActive));
+                if (button.classList.contains('zone-quick-link')) {
+                    button.classList.toggle('is-active', isActive);
+                } else {
+                    button.className = isActive
+                        ? "zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation"
+                        : "zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation";
+                }
+            });
+        }
+
+        function updateZoneFilterUrl(zone) {
+            const url = new URL(window.location.href);
+            if (zone === 'ALL') url.searchParams.delete('zone');
+            else url.searchParams.set('zone', zone);
+            const nextAddress = `${url.pathname}${url.search}${url.hash}`;
+            const currentAddress = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+            if (nextAddress !== currentAddress) {
+                window.history.pushState({ zoneFilter: zone }, '', nextAddress);
+            }
+        }
+
+        let currentFilterZone = getInitialZoneFilter();
         let isAdminLoggedIn = false;
         let zoneTransitionToken = 0;
         let zoneTransitionTimer = null;
@@ -2091,17 +2137,16 @@
             });
         }
 
-        function filterZone(zone) {
-            if (currentFilterZone === zone) return;
+        function filterZone(zone, options = {}) {
+            if (!validZoneFilters.has(zone)) return;
+            if (currentFilterZone === zone) {
+                syncZoneControls(zone);
+                return;
+            }
 
             currentFilterZone = zone;
-            document.querySelectorAll('.zone-btn').forEach(btn => {
-                if (btn.getAttribute('data-zone') === zone) {
-                    btn.className = "zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation";
-                } else {
-                    btn.className = "zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation";
-                }
-            });
+            syncZoneControls(zone);
+            if (options.updateUrl !== false) updateZoneFilterUrl(zone);
 
             const container = document.getElementById('zonesContainer');
             const savedScrollY = window.scrollY;
@@ -2591,6 +2636,8 @@
         }
 
         // Initialize App
+        syncZoneControls(currentFilterZone);
+        window.addEventListener('popstate', () => filterZone(getInitialZoneFilter(), { updateUrl: false }));
         renderCases();
         lucide.createIcons();
     </script>
