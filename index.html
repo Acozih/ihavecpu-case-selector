@@ -1337,6 +1337,278 @@
     }
 </style>
 
+<style id="visual-refinement-2026">
+    :root {
+        --ui-canvas: #f4f5f6;
+        --ui-surface: #ffffff;
+        --ui-line: #e3e5e8;
+        --ui-ink: #25272b;
+        --ui-muted: #70747b;
+        --ui-brand: #c62828;
+    }
+    body {
+        color: var(--ui-ink) !important;
+        background: linear-gradient(180deg, #f7f8f9 0%, var(--ui-canvas) 100%) !important;
+    }
+    header.sticky {
+        background: rgba(255,255,255,0.97) !important;
+        border-color: #e7e8ea !important;
+        box-shadow: 0 2px 12px rgba(25,28,33,0.045) !important;
+    }
+    #mainTitle {
+        color: var(--ui-ink) !important;
+        background: none !important;
+        -webkit-text-fill-color: var(--ui-ink) !important;
+    }
+    #zoneFilterPanel {
+        max-width: 1040px;
+        padding: 12px 14px !important;
+        gap: 7px !important;
+        border: 1px solid var(--ui-line) !important;
+        border-radius: 18px !important;
+        background: rgba(255,255,255,0.96) !important;
+        box-shadow: 0 5px 16px rgba(25,28,33,0.045) !important;
+        margin-bottom: 1.75rem !important;
+    }
+    #zoneFilterPanel .zone-btn {
+        min-height: 42px;
+        padding: 0 14px !important;
+        border: 1px solid #e2e4e7 !important;
+        border-radius: 999px !important;
+        background: #fff !important;
+        color: #51545a !important;
+        box-shadow: 0 1px 3px rgba(20,23,28,0.04) !important;
+        font-size: 0.74rem !important;
+        transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease !important;
+    }
+    #zoneFilterPanel .zone-btn:hover {
+        background: #f6f6f7 !important;
+        color: #202226 !important;
+        border-color: #d2d5d9 !important;
+        transform: translateY(-1px);
+    }
+    #zoneFilterPanel .zone-btn.bg-black {
+        color: #fff !important;
+        background: linear-gradient(110deg, #292b30 0%, #41444b 100%) !important;
+        border-color: transparent !important;
+        box-shadow: 0 4px 10px rgba(32,34,39,0.16) !important;
+    }
+    .zone-dashboard-section {
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    #zonesContainer [data-zone-header] {
+        border-radius: 16px !important;
+        box-shadow: 0 4px 12px rgba(32,34,39,0.045) !important;
+    }
+    #zonesContainer [data-zone-header="ZONE ITX"] {
+        box-shadow: 0 6px 16px rgba(190,151,31,0.14), inset 0 1px 0 rgba(255,255,255,0.92) !important;
+    }
+    #zonesContainer [data-zone-header="ZONE PREMIUM"] {
+        box-shadow: 0 6px 16px rgba(80,88,96,0.12), inset 0 1px 0 rgba(255,255,255,0.92) !important;
+    }
+    #zonesContainer .apple-card {
+        border: 1px solid #e2e4e7 !important;
+        border-radius: 19px !important;
+        background: var(--ui-surface) !important;
+        box-shadow: 0 4px 14px rgba(25,28,33,0.055) !important;
+        transition: transform 220ms cubic-bezier(0.22,0.61,0.36,1), box-shadow 220ms ease, border-color 180ms ease !important;
+    }
+    #zonesContainer .apple-card.border-red-600 {
+        border-color: #c62828 !important;
+        box-shadow: 0 0 0 2px rgba(198,40,40,0.10), 0 5px 16px rgba(25,28,33,0.06) !important;
+    }
+    #zonesContainer .apple-card.border-amber-500 {
+        border-color: #c69228 !important;
+        box-shadow: 0 0 0 2px rgba(198,146,40,0.12), 0 5px 16px rgba(25,28,33,0.06) !important;
+    }
+    #zonesContainer .apple-card .aspect-square {
+        background: linear-gradient(180deg, #f3f4f5 0%, #f8f8f9 58%, #ffffff 100%) !important;
+    }
+    #zonesContainer .product-image {
+        transition: transform 240ms cubic-bezier(0.22,0.61,0.36,1), opacity 180ms ease !important;
+    }
+    #zonesContainer .case-thumbnails {
+        background: #fff !important;
+        border-top-color: #eceef0 !important;
+    }
+    #zonesContainer .case-thumbnails button { border-radius: 10px !important; }
+    #zonesContainer .case-thumbnails button.border-blue-600 {
+        border-color: var(--ui-brand) !important;
+        box-shadow: 0 0 0 2px rgba(198,40,40,0.09) !important;
+    }
+    #zonesContainer .case-details { padding: 16px !important; }
+    #zonesContainer .case-details h3 {
+        min-height: 2.65em;
+        margin-bottom: 10px !important;
+        color: #24262a !important;
+        font-size: 0.94rem !important;
+        line-height: 1.38 !important;
+        letter-spacing: 0.005em;
+    }
+    #zonesContainer .case-details div[class*="space-y-0.5"] {
+        padding-top: 8px !important;
+        border-top-color: #eceef0 !important;
+    }
+    #zonesContainer .case-details div[class*="space-y-0.5"] > div {
+        min-height: 28px;
+        padding: 5px 0 !important;
+        border-color: #f0f1f2 !important;
+        color: var(--ui-muted) !important;
+        font-size: 0.73rem !important;
+        line-height: 1.4 !important;
+    }
+    #zonesContainer .case-details [data-lucide] { color: #858a91 !important; }
+    #zonesContainer .case-select-button {
+        min-height: 44px;
+        border-radius: 13px !important;
+        font-size: 0.78rem !important;
+        letter-spacing: 0.005em;
+        transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease !important;
+    }
+    #zonesContainer .case-select-button.bg-slate-700 {
+        color: #fff !important;
+        background: linear-gradient(110deg, #292b30 0%, #42454c 100%) !important;
+        border: 1px solid rgba(30,32,36,0.12) !important;
+        box-shadow: 0 3px 8px rgba(28,30,34,0.13) !important;
+    }
+    #zonesContainer .case-select-button.bg-slate-700:hover {
+        background: linear-gradient(110deg, #1f2024 0%, #373a40 100%) !important;
+    }
+    #zonesContainer .case-select-button.bg-red-600 {
+        color: #fff !important;
+        background: linear-gradient(110deg, #b9222a 0%, #d33c3c 100%) !important;
+        border: 1px solid rgba(150,22,28,0.20) !important;
+        box-shadow: 0 3px 9px rgba(178,31,39,0.19) !important;
+    }
+    #zonesContainer .case-select-button.bg-amber-500 {
+        color: #30240c !important;
+        background: linear-gradient(110deg, #d5a333 0%, #f1d17a 100%) !important;
+        border: 1px solid rgba(150,110,24,0.20) !important;
+        box-shadow: 0 3px 9px rgba(170,127,31,0.16) !important;
+    }
+    #zonesContainer .case-select-button:disabled {
+        color: #858990 !important;
+        background: #eceef0 !important;
+        border: 1px solid #e2e4e7 !important;
+        box-shadow: none !important;
+    }
+    #zonesContainer .case-select-button.is-pressing {
+        animation: case-button-press-calm 240ms cubic-bezier(0.22,0.61,0.36,1) both !important;
+        filter: none !important;
+        box-shadow: 0 2px 6px rgba(20,22,28,0.14) !important;
+    }
+    #zonesContainer .case-select-button.is-pressing::after { animation: none !important; opacity: 0 !important; }
+    @keyframes case-button-press-calm {
+        0% { transform: translateY(0) scale(1); }
+        38% { transform: translateY(2px) scale(0.975); }
+        100% { transform: translateY(0) scale(1); }
+    }
+    #floatingBar {
+        color: #fff !important;
+        background: linear-gradient(115deg, #202125 0%, #2e3035 100%) !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        box-shadow: 0 12px 30px rgba(20,22,26,0.22) !important;
+    }
+    #selectedCount { background: var(--ui-brand) !important; }
+    #notifyBtn {
+        min-height: 44px;
+        color: #fff !important;
+        background: linear-gradient(110deg, #c62828 0%, #a91f26 100%) !important;
+        box-shadow: 0 4px 12px rgba(175,32,39,0.20) !important;
+    }
+    #notifyBtn:hover { filter: brightness(1.06); }
+    #notifyBtn, #notifyBtn i { color: #fff !important; }
+    #backToTopBtn {
+        color: #fff !important;
+        background: linear-gradient(145deg, #34363c 0%, #202125 100%) !important;
+        border-color: rgba(255,255,255,0.20) !important;
+        box-shadow: 0 6px 18px rgba(22,24,29,0.20) !important;
+    }
+    #zoneQuickMenu .zone-quick-toggle {
+        background: #292b30 !important;
+        box-shadow: 0 4px 12px rgba(22,24,29,0.16) !important;
+    }
+    #zoneQuickMenu .zone-quick-link:focus-visible,
+    #zoneFilterPanel .zone-btn:focus-visible,
+    #zonesContainer .case-select-button:focus-visible {
+        outline: 3px solid rgba(198,40,40,0.38) !important;
+        outline-offset: 2px !important;
+    }
+    button:focus-visible, a:focus-visible { outline-color: rgba(198,40,40,0.42) !important; }
+    .zone-dashboard-section.single-case-zone .grid {
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .zone-dashboard-section.single-case-zone .apple-card {
+        width: min(100%, 340px);
+        flex: 0 1 340px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        #zonesContainer .apple-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 9px 20px rgba(25,28,33,0.09) !important;
+        }
+        #zonesContainer .apple-card:hover .product-image { transform: scale(1.018); }
+    }
+    @media (max-width: 639px) {
+        #zoneFilterPanel {
+            padding: 9px 8px !important;
+            gap: 6px !important;
+            border-radius: 16px !important;
+            margin-bottom: 1.4rem !important;
+        }
+        #zoneFilterPanel .zone-btn {
+            min-height: 44px;
+            padding-left: 11px !important;
+            padding-right: 11px !important;
+            font-size: 0.69rem !important;
+        }
+        #zonesContainer .apple-card { border-radius: 16px !important; }
+        #zonesContainer .case-details { padding: 12px !important; }
+        #zonesContainer .case-details h3 {
+            min-height: 2.8em;
+            margin-bottom: 8px !important;
+            font-size: 0.78rem !important;
+            line-height: 1.42 !important;
+        }
+        #zonesContainer .case-details div[class*="space-y-0.5"] > div {
+            min-height: 26px;
+            font-size: 0.67rem !important;
+        }
+        #zonesContainer .case-select-button {
+            min-height: 44px;
+            padding-left: 7px !important;
+            padding-right: 7px !important;
+            font-size: 0.69rem !important;
+        }
+        #floatingBar {
+            width: calc(100% - 16px) !important;
+            bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+            padding: 12px !important;
+            gap: 9px !important;
+            border-radius: 16px !important;
+        }
+        #floatingBar > div:first-child { gap: 9px !important; }
+        #floatingBar > div:last-child { gap: 8px !important; }
+        #floatingBar > div:last-child > button { min-height: 42px; }
+        #notifyBtn { min-height: 44px; padding-left: 14px !important; padding-right: 14px !important; }
+        .zone-dashboard-section.single-case-zone .apple-card { width: min(100%, 340px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        #zoneFilterPanel .zone-btn,
+        #zonesContainer .apple-card,
+        #zonesContainer .product-image,
+        #zonesContainer .case-select-button { transition: none !important; }
+        #zonesContainer .apple-card:hover { transform: none !important; }
+        #zonesContainer .apple-card:hover .product-image { transform: none !important; }
+        #zonesContainer .case-select-button.is-pressing { animation: none !important; }
+    }
+</style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
 
@@ -1891,7 +2163,7 @@
                 totalVisibleCount += zoneCases.length;
 
                 const zoneSection = document.createElement('div');
-                zoneSection.className = "zone-dashboard-section space-y-4";
+                zoneSection.className = "zone-dashboard-section space-y-4" + (zoneCases.length === 1 ? " single-case-zone" : "");
 
                 const headerStyle = getZoneHeaderColorClass(zoneName);
                 const badgeColor = getZoneBadgeColor(zoneName);
@@ -1905,7 +2177,7 @@
                     </div>
                 `;
 
-                let gridHtml = `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-6">`;
+                let gridHtml = `<div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">`;
 
                 zoneCases.forEach(c => {
                     const selectedIndex = selectedCaseIds.indexOf(c.id);
