@@ -997,7 +997,7 @@
         .case-select-button.bg-red-600:hover { filter: saturate(1.06) brightness(1.02); }
         .case-select-button:active,
         .case-select-button.is-pressing {
-            animation: case-button-press-wiggle 405ms cubic-bezier(0.22, 0.72, 0.28, 1) both !important;
+            animation: case-button-press-wiggle 324ms cubic-bezier(0.22, 0.72, 0.28, 1) both !important;
             filter: brightness(0.94) saturate(1.04) !important;
             box-shadow:
                 0 0 0 2px rgba(255,255,255,0.72),
@@ -1016,7 +1016,7 @@
         }
         .case-select-button:active::after,
         .case-select-button.is-pressing::after {
-            animation: case-button-white-flash 405ms ease-out both;
+            animation: case-button-white-flash 324ms ease-out both;
         }
         @keyframes case-button-white-flash {
             0% { opacity: 0; transform: scale(0.55); }
@@ -1060,7 +1060,7 @@
             box-shadow: 0 2px 6px rgba(20,22,28,0.12) !important;
         }
         .case-select-button.is-pressing {
-            animation: case-button-smooth-press 405ms cubic-bezier(0.22,0.61,0.36,1) both !important;
+            animation: case-button-smooth-press 324ms cubic-bezier(0.22,0.61,0.36,1) both !important;
             will-change: transform;
             filter: none !important;
             box-shadow: 0 2px 6px rgba(20,22,28,0.12) !important;
@@ -1080,7 +1080,7 @@
             will-change: transform, opacity;
         }
         .case-select-button.is-pressing::after {
-            animation: case-button-smooth-white-sheen 405ms ease-out both !important;
+            animation: case-button-smooth-white-sheen 324ms ease-out both !important;
         }
         .case-select-button:active:not(.is-pressing)::after { animation: none !important; opacity: 0.24; }
         @keyframes case-button-smooth-white-sheen {
@@ -1118,6 +1118,120 @@
         #zonesContainer .case-select-button.is-pressing:hover { filter: none !important; }
 
     </style>
+
+<style>
+    /* Left-side zone quick menu: shown only after scrolling; no backdrop blur to keep scrolling light. */
+    #zoneQuickMenu {
+        position: fixed;
+        left: 12px;
+        top: 50%;
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        width: 112px;
+        padding: 8px;
+        border: 1px solid rgba(218,221,230,0.95);
+        border-radius: 17px;
+        background: rgba(255,255,255,0.97);
+        box-shadow: 0 8px 22px rgba(38,40,52,0.14);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate3d(-12px,-50%,0);
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+        will-change: opacity, transform;
+    }
+    #zoneQuickMenu.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate3d(0,-50%,0);
+    }
+    #zoneQuickMenu .zone-quick-toggle { display: none; }
+    #zoneQuickList { display: flex; flex-direction: column; gap: 5px; }
+    .zone-quick-link {
+        --zone-accent: #64748b;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 38px;
+        padding: 7px 9px;
+        border: 1px solid #e6e8ee;
+        border-left: 3px solid var(--zone-accent);
+        border-radius: 10px;
+        background: #fff;
+        color: #414653;
+        font: 700 11px/1.1 system-ui, sans-serif;
+        text-align: left;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+    }
+    .zone-quick-link:hover { background: #f7f8fb; transform: translateX(1px); }
+    .zone-quick-link.is-active { background: #f3f4f6; border-color: var(--zone-accent); color: #20232b; }
+    .zone-quick-link[data-zone="ZONE D"] { --zone-accent: #059669; }
+    .zone-quick-link[data-zone="ZONE C"] { --zone-accent: #2563eb; }
+    .zone-quick-link[data-zone="ZONE A"] { --zone-accent: #7c3aed; }
+    .zone-quick-link[data-zone="ZONE B"] { --zone-accent: #db2777; }
+    .zone-quick-link[data-zone="ZONE PREMIUM"] { --zone-accent: #64748b; }
+    .zone-quick-link[data-zone="ALL"] { --zone-accent: #30323a; }
+    .zone-quick-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--zone-accent); }
+    @media (max-width: 640px) {
+        #zoneQuickMenu {
+            top: auto;
+            bottom: calc(122px + env(safe-area-inset-bottom, 0px));
+            left: 8px;
+            width: auto;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            transform: translate3d(-10px,0,0);
+        }
+        #zoneQuickMenu.is-visible { transform: translate3d(0,0,0); }
+        #zoneQuickMenu .zone-quick-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-width: 52px;
+            min-height: 46px;
+            padding: 0 10px;
+            border: 1px solid rgba(255,255,255,0.72);
+            border-radius: 15px;
+            background: #30323a;
+            color: #fff;
+            box-shadow: 0 5px 14px rgba(24,26,34,0.24);
+            font: 700 12px/1 system-ui, sans-serif;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        #zoneQuickMenu .zone-quick-toggle svg { width: 15px; height: 15px; }
+        #zoneQuickList {
+            display: none;
+            position: absolute;
+            left: 0;
+            bottom: calc(100% + 8px);
+            width: 150px;
+            max-height: min(62vh, 390px);
+            overflow-y: auto;
+            padding: 8px;
+            border: 1px solid rgba(218,221,230,0.98);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 8px 22px rgba(38,40,52,0.18);
+        }
+        #zoneQuickMenu.is-open #zoneQuickList { display: flex; }
+        .zone-quick-link { min-height: 42px; font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        #zoneQuickMenu, .zone-quick-link { transition: none !important; }
+    }
+</style>
+
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
 
@@ -1186,7 +1300,7 @@
         <div id="zoneFilterPanel" role="navigation" aria-label="เลือกโซนเคส" class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-12 px-1">
             <button onclick="filterZone('ALL')" data-zone="ALL" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-black text-white shadow-sm touch-manipulation">ทั้งหมด</button>
             <button onclick="filterZone('ZONE D')" data-zone="ZONE D" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE D (10)</button>
-            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (11)</button>
+            <button onclick="filterZone('ZONE C')" data-zone="ZONE C" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE C (12)</button>
             <button onclick="filterZone('ZONE A')" data-zone="ZONE A" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE A (7)</button>
             <button onclick="filterZone('ZONE B')" data-zone="ZONE B" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE B (10)</button>
             <button onclick="filterZone('ZONE PREMIUM')" data-zone="ZONE PREMIUM" class="zone-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold tracking-wide transition bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80 touch-manipulation">ZONE PREMIUM (68)</button>
@@ -1879,11 +1993,11 @@
             document.body.appendChild(overlay);
             window.setTimeout(() => overlay.remove(), 920);
 
-            // Keep the pressed state visible until the deeper 450ms press animation completes.
+            // Keep the pressed state visible until the 324ms press animation completes.
             button.classList.add('is-pressing');
             button.disabled = true;
             const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const pressDuration = prefersReducedMotion ? 150 : 405;
+            const pressDuration = prefersReducedMotion ? 150 : 324;
             window.setTimeout(() => {
                 button.classList.remove('is-pressing');
                 toggleSelectCase(id);
@@ -2316,5 +2430,85 @@
         renderCases();
         lucide.createIcons();
     </script>
+
+<nav id="zoneQuickMenu" aria-label="เมนูเลือกโซนเคส" aria-hidden="true">
+    <button id="zoneQuickToggle" class="zone-quick-toggle" type="button" aria-expanded="false" aria-controls="zoneQuickList" aria-label="เปิดเมนูเลือกโซน">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <span>โซน</span>
+    </button>
+    <div id="zoneQuickList" role="group" aria-label="เลือกโซน">
+        <button type="button" class="zone-quick-link" data-zone="ALL" aria-label="แสดงทุกโซน"><span class="zone-quick-dot"></span>ทั้งหมด</button>
+        <button type="button" class="zone-quick-link" data-zone="ZONE D" aria-label="เลือก ZONE D"><span class="zone-quick-dot"></span>ZONE D</button>
+        <button type="button" class="zone-quick-link" data-zone="ZONE C" aria-label="เลือก ZONE C"><span class="zone-quick-dot"></span>ZONE C</button>
+        <button type="button" class="zone-quick-link" data-zone="ZONE A" aria-label="เลือก ZONE A"><span class="zone-quick-dot"></span>ZONE A</button>
+        <button type="button" class="zone-quick-link" data-zone="ZONE B" aria-label="เลือก ZONE B"><span class="zone-quick-dot"></span>ZONE B</button>
+        <button type="button" class="zone-quick-link" data-zone="ZONE PREMIUM" aria-label="เลือก ZONE PREMIUM"><span class="zone-quick-dot"></span>PREMIUM</button>
+    </div>
+</nav>
+<script>
+(() => {
+    const menu = document.getElementById('zoneQuickMenu');
+    const toggle = document.getElementById('zoneQuickToggle');
+    const list = document.getElementById('zoneQuickList');
+    if (!menu || !toggle || !list) return;
+
+    const setOpen = open => {
+        menu.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'ปิดเมนูเลือกโซน' : 'เปิดเมนูเลือกโซน');
+    };
+    const setActive = zone => {
+        menu.querySelectorAll('.zone-quick-link').forEach(button => {
+            const active = button.dataset.zone === zone;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', String(active));
+        });
+    };
+
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+    list.addEventListener('click', event => {
+        const button = event.target.closest('.zone-quick-link');
+        if (!button) return;
+        const zone = button.dataset.zone;
+        if (typeof filterZone === 'function') filterZone(zone);
+        setActive(zone);
+        setOpen(false);
+        const target = document.getElementById('zonesContainer');
+        if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    });
+
+    const topFilters = document.getElementById('zoneFilterPanel');
+    if (topFilters) topFilters.addEventListener('click', event => {
+        const button = event.target.closest('.zone-btn');
+        if (button) setActive(button.dataset.zone);
+    });
+    document.addEventListener('click', event => {
+        if (!menu.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') setOpen(false);
+    });
+
+    let framePending = false;
+    const updateVisibility = () => {
+        if (framePending) return;
+        framePending = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const visible = scrollTop > 160;
+            menu.classList.toggle('is-visible', visible);
+            menu.setAttribute('aria-hidden', String(!visible));
+            if (!visible) setOpen(false);
+            framePending = false;
+        });
+    };
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility, { passive: true });
+    window.addEventListener('pageshow', updateVisibility);
+    setActive(typeof currentFilterZone !== 'undefined' ? currentFilterZone : 'ALL');
+    updateVisibility();
+})();
+</script>
+
 </body>
 </html>
