@@ -1195,7 +1195,7 @@
     .zone-quick-link[data-zone="ZONE C"] { --zone-accent: #2563eb; }
     .zone-quick-link[data-zone="ZONE A"] { --zone-accent: #7c3aed; }
     .zone-quick-link[data-zone="ZONE B"] { --zone-accent: #db2777; }
-    .zone-quick-link[data-zone="ZONE PREMIUM"] { --zone-accent: #A6A7AC; }
+    .zone-quick-link[data-zone="ZONE PREMIUM"] { --zone-accent: #8B9796; }
     .zone-quick-link[data-zone="ZONE ITX"] { --zone-accent: #FFD700; }
     .zone-quick-link[data-zone="ALL"] { --zone-accent: #30323a; }
     .zone-quick-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--zone-accent); }
@@ -1284,9 +1284,9 @@
 
     #zonesContainer [data-zone-header="ZONE PREMIUM"],
     #zonesContainer .zone-premium-silver-header {
-        color: #52595C !important;
-        border-color: #A6A7AC !important;
-        background: linear-gradient(110deg, rgba(139,151,150,0.20) 0%, rgba(242,243,247,0.88) 22%, rgba(116,120,129,0.18) 38%, rgba(250,250,252,0.96) 52%, rgba(210,214,223,0.66) 74%, rgba(82,89,92,0.10) 100%) !important;
+        color: #3F444D !important;
+        border-color: #8B9796 !important;
+        background: linear-gradient(135deg, #A6A7AC 0%, #F2F3F7 18%, #8B9796 36%, #FAFAFC 52%, #D2D6DF 70%, #A6A7AC 86%, #F2F3F7 100%) !important;
         box-shadow: 0 7px 22px rgba(82,89,92,0.17), inset 0 1px 0 rgba(255,255,255,0.95) !important;
     }
     #zonesContainer [data-zone-header="ZONE PREMIUM"] > div:first-child > span,
@@ -1295,6 +1295,15 @@
         background: linear-gradient(135deg, #A6A7AC 0%, #F2F3F7 18%, #8B9796 36%, #FAFAFC 52%, #D2D6DF 70%, #A6A7AC 86%, #F2F3F7 100%) !important;
         border: 1px solid #8B9796 !important;
         text-shadow: 0 1px 0 rgba(255,255,255,0.75) !important;
+    }
+    #zoneQuickMenu .zone-quick-link[data-zone="ZONE PREMIUM"] {
+        --zone-accent: #8B9796;
+        color: #3F444D !important;
+        border-color: #8B9796 !important;
+        background: linear-gradient(135deg, #A6A7AC 0%, #F2F3F7 18%, #8B9796 36%, #FAFAFC 52%, #D2D6DF 70%, #A6A7AC 86%, #F2F3F7 100%) !important;
+    }
+    #zoneQuickMenu .zone-quick-link[data-zone="ZONE PREMIUM"] .zone-quick-dot {
+        background: linear-gradient(135deg, #A6A7AC 0%, #F2F3F7 18%, #8B9796 36%, #FAFAFC 52%, #D2D6DF 70%, #A6A7AC 86%, #F2F3F7 100%) !important;
     }
 </style>
 
