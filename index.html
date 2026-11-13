@@ -1687,6 +1687,101 @@
         /* Hidden floating bar must not intercept mobile taps; zone controls stay above it. */
         #floatingBar.opacity-0 { pointer-events: none !important; }
         #zoneQuickMenu { z-index: 60 !important; }
+        #caseSearchToggle {
+            position: fixed;
+            left: 50%;
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            z-index: 62;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 0 18px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 999px;
+            background: linear-gradient(145deg, #34363c 0%, #202125 100%);
+            color: #fff;
+            box-shadow: 0 8px 22px rgba(22,24,29,0.24);
+            font: 700 13px/1 system-ui, sans-serif;
+            cursor: pointer;
+            touch-action: manipulation;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(-50%, 10px, 0);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, bottom 180ms ease;
+            white-space: nowrap;
+        }
+        #caseSearchToggle.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate3d(-50%, 0, 0);
+        }
+        #caseSearchToggle.above-floating-bar { bottom: calc(154px + env(safe-area-inset-bottom, 0px)); }
+        #caseSearchToggle svg { width: 17px; height: 17px; flex: 0 0 17px; }
+        #caseSearchPanel {
+            position: fixed;
+            left: 50%;
+            bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+            z-index: 63;
+            width: min(420px, calc(100vw - 28px));
+            padding: 14px;
+            border: 1px solid rgba(218,221,230,0.98);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 12px 32px rgba(38,40,52,0.22);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(-50%, 10px, 0);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, bottom 180ms ease;
+        }
+        #caseSearchPanel.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate3d(-50%, 0, 0);
+        }
+        #caseSearchPanel.above-floating-bar { bottom: calc(212px + env(safe-area-inset-bottom, 0px)); }
+        #caseSearchPanel input {
+            width: 100%;
+            min-width: 0;
+            min-height: 44px;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: #292b32;
+            font: 600 14px/1.35 system-ui, sans-serif;
+        }
+        #caseSearchPanel input::placeholder { color: #969aa3; font-weight: 500; }
+        #caseSearchPanel .case-search-input-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 0 10px;
+            border: 1px solid #e1e4ea;
+            border-radius: 12px;
+            background: #f8f9fb;
+        }
+        #caseSearchPanel .case-search-input-row > svg { width: 17px; height: 17px; flex: 0 0 17px; color: #777c86; }
+        #caseSearchClear, #caseSearchClose {
+            min-height: 36px;
+            padding: 0 11px;
+            border: 1px solid #e2e4e8;
+            border-radius: 10px;
+            background: #fff;
+            color: #555a64;
+            font: 700 12px/1 system-ui, sans-serif;
+            cursor: pointer;
+        }
+        #caseSearchClear { display: flex; width: 34px; height: 34px; min-height: 34px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; }
+        #caseSearchClear svg { width: 16px; height: 16px; }
+        #caseSearchResultCount { min-height: 18px; color: #777c86; font: 500 11px/1.4 system-ui, sans-serif; }
+        @media (prefers-reduced-motion: reduce) {
+            #caseSearchToggle, #caseSearchPanel { transition: none !important; }
+        }
 </style>
 </head>
 <body class="bg-[#fbfbfd] min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white pb-36 sm:pb-32">
@@ -1771,8 +1866,8 @@
             <div class="w-14 h-14 sm:w-16 sm:h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i data-lucide="package-open" class="w-7 h-7 sm:w-8 sm:h-8 text-slate-400"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-800 mb-1">ไม่พบข้อมูลเคสในโซนนี้</h3>
-            <p class="text-xs text-slate-500">กรุณาเลือกโซนอื่น หรือเพิ่มเคสใหม่ผ่านโหมด Admin</p>
+            <h3 id="emptyStateTitle" class="text-base font-bold text-slate-800 mb-1">ไม่พบข้อมูลเคสในโซนนี้</h3>
+            <p id="emptyStateDescription" class="text-xs text-slate-500">กรุณาเลือกโซนอื่น หรือเพิ่มเคสใหม่ผ่านโหมด Admin</p>
         </div>
     </main>
 
@@ -1985,7 +2080,7 @@
             { id: "case-c2", name: "GIGABYTE C102 GLASS ICE (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "410 mm", images: ["https://static.gigabyte.com/StaticFile/Image/Global/4dde0470d15c99a640805e9e031148d1/ProductRemoveBg/40200/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/d29000f51f12211d3816600f964e6dd3/ProductRemoveBg/40204/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/0d402de2f51a6f041c705422076a4cc0/ProductRemoveBg/40202/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/ceb4a8ea7d00c88bb2a10a6c2ccf7279/ProductRemoveBg/40203/webp/670","https://static.gigabyte.com/StaticFile/Image/Global/2dba095bef949f1ed34afd488c982492/ProductRemoveBg/40201/webp/670"], customFields: {} },
             { id: "case-c3", name: "iHAVECPU G390 V2 (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98330_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98332_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98331_800.jpg"], isPopular: true, customFields: {} },
             { id: "case-c4", name: "iHAVECPU G390 V2 (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "165 mm", weight: "380 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98333_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98335_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products98334_800.jpg"], isSoldOut: true, customFields: {} },
-            { id: "case-c5", name: "iHAVECPU IHC 102 WOOD (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83412_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83413_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83414_800.jpg"], customFields: {} },
+            { id: "case-c5", name: "iHAVECPU IHC 102 WOOD (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83412_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83413_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83414_800.jpg"], isLowStock: true, customFields: {} },
             { id: "case-c6", name: "iHAVECPU IHC 102 WOOD (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "175 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83415_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83416_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products83417_800.jpg"], isSoldOut: true, customFields: {} },
             { id: "case-c7", name: "OCYPUS x iHAVECPU GAMMA C52 ARGB (BLACK)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124188_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124189_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124192_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124193_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124191_800.jpg"], isPopular: true, customFields: {} },
             { id: "case-c8", name: "OCYPUS x iHAVECPU GAMMA C52 ARGB (WHITE)(mATX)", zone: "ZONE C", mbType: "Micro-ATX,ITX", dimension: "170 mm", weight: "425 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124197_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124198_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124201_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124202_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products124200_800.jpg"], isPopular: true, customFields: {} },
@@ -2083,7 +2178,7 @@
             { id: "case-premium-63", name: "HYTE Y60 (SNOW/WHITE)(E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "160 mm", weight: "375 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products38030_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products38031_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products38032_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products38034_800.jpg"], isLowStock: true, customFields: {} },
             { id: "case-premium-64", name: "HYTE Y70 14.9 TOUCH INFINITE (BLACK/BLACK)(E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85411_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85412_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85413_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85416_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85414_800.jpg"], isLowStock: true, customFields: {} },
             { id: "case-premium-65", name: "HYTE Y70 14.9 TOUCH INFINITE (SNOW WHITE)(E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85417_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85418_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85419_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85422_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products85420_800.jpg"], isLowStock: true, customFields: {} },
-            { id: "case-premium-66", name: "HYTE Y70 WITH RISER NON LCD FIREFLY JAPANESE EDITION (E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162021_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162022_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162023_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162024_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162025_800.jpg"], isLowStock: true, customFields: {} },
+            { id: "case-premium-66", name: "HYTE Y70 WITH RISER NON LCD FIREFLY JAPANESE EDITION (E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162021_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162022_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162023_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162024_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products162025_800.jpg"], isSoldOut: true, customFields: {} },
             { id: "case-premium-67", name: "HYTE Y70 WITH RISER NON LCD (BLACK/BLACK)(E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41754_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41755_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41756_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41757_800.jpg"], isLowStock: true, customFields: {} },
             { id: "case-premium-68", name: "HYTE Y70 WITH RISER NON LCD (SNOW/WHITE)(E-ATX)", zone: "ZONE PREMIUM", mbType: "E-ATX,ATX,Micro-ATX,ITX", dimension: "180 mm", weight: "422 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41758_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41759_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41760_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products41761_800.jpg"], isLowStock: true, customFields: {} },
             { id: "case-itx-1", name: "DEEPCOOL CH170 DIGITAL (WHITE)(MINI-ITX)", zone: "ZONE ITX", mbType: "Mini-ITX", dimension: "172 mm", weight: "305 mm", images: ["https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products65133_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products65132_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products65134_800.jpg","https://ihcupload-bkk.s3.ap-southeast-7.amazonaws.com/img/product/products65135_800.jpg"], customFields: {} },
@@ -2136,6 +2231,33 @@
                 } catch (e) {}
             }
         }
+        // Apply requested stock states once per product name in saved browser catalogs.
+        // Missing names remain pending, so a locally added model can receive its status later.
+        const requestedStockMigrationKey = 'ihavecpu_migration_requested_stock_2026_11_13_v1';
+        let appliedRequestedStockNames = [];
+        try {
+            appliedRequestedStockNames = JSON.parse(localStorage.getItem(requestedStockMigrationKey) || '[]');
+            if (!Array.isArray(appliedRequestedStockNames)) appliedRequestedStockNames = [];
+        } catch (e) {}
+        const normalizeStockName = name => String(name || '').trim().replace(/\s+/g, ' ').toLocaleUpperCase();
+        const requestedStockOverrides = [
+            { name: 'iHAVECPU IHC 102 WOOD (BLACK)(mATX)', isLowStock: true, isSoldOut: false },
+            { name: 'iHAVECPU IHC 102 WOOD (WHITE)(mATX)', isLowStock: false, isSoldOut: true },
+            { name: 'HYTE Y70 HOSHIMACHI SUISEI LIMITED EDITION (E-ATX)', isLowStock: false, isSoldOut: true },
+            { name: 'HYTE Y70 WITH RISER NON LCD FIREFLY JAPANESE EDITION (E-ATX)', isLowStock: false, isSoldOut: true }
+        ];
+        requestedStockOverrides.forEach(status => {
+            const normalizedName = normalizeStockName(status.name);
+            if (appliedRequestedStockNames.includes(normalizedName)) return;
+            const product = casesData.find(item => normalizeStockName(item.name) === normalizedName);
+            if (!product) return;
+            product.isSoldOut = status.isSoldOut;
+            if (status.isLowStock) product.isLowStock = true;
+            else delete product.isLowStock;
+            appliedRequestedStockNames.push(normalizedName);
+        });
+        try { localStorage.setItem('ihavecpu_cases', JSON.stringify(casesData)); } catch (e) {}
+        try { localStorage.setItem(requestedStockMigrationKey, JSON.stringify(appliedRequestedStockNames)); } catch (e) {}
         try { localStorage.setItem('ihavecpu_cases', JSON.stringify(casesData)); } catch(e) {}
         let customFields = JSON.parse(localStorage.getItem('ihavecpu_custom_fields')) || [];
         let headerTexts = JSON.parse(localStorage.getItem('ihavecpu_header')) || { main: "เลือกเคสที่ใช่ สไตล์ของคุณ", sub: "เลือกได้ 2 เคส | เคสหลัก และเคสสำรอง" };
@@ -2177,6 +2299,7 @@
         }
 
         let currentFilterZone = getInitialZoneFilter();
+        let caseSearchQuery = '';
         let isAdminLoggedIn = false;
         let zoneTransitionToken = 0;
         let zoneTransitionTimer = null;
@@ -2229,6 +2352,7 @@
             const container = document.getElementById('zonesContainer');
             const emptyState = document.getElementById('emptyState');
             container.innerHTML = '';
+            const normalizedSearchQuery = String(caseSearchQuery || '').trim().toLocaleLowerCase();
 
             const zonesOrder = ['ZONE D', 'ZONE C', 'ZONE A', 'ZONE B', 'ZONE PREMIUM', 'ZONE ITX'];
             const targetZones = currentFilterZone === 'ALL' ? zonesOrder : [currentFilterZone];
@@ -2236,7 +2360,7 @@
             let totalVisibleCount = 0;
 
             targetZones.forEach(zoneName => {
-                const zoneCases = casesData.filter(c => c.zone === zoneName);
+                const zoneCases = casesData.filter(c => c.zone === zoneName && (!normalizedSearchQuery || String(c.name || '').toLocaleLowerCase().includes(normalizedSearchQuery)));
                 if (zoneCases.length === 0) return;
 
                 totalVisibleCount += zoneCases.length;
@@ -2414,11 +2538,17 @@
                 container.appendChild(zoneSection);
             });
 
+            const emptyTitle = document.getElementById('emptyStateTitle');
+            const emptyDescription = document.getElementById('emptyStateDescription');
             if (totalVisibleCount === 0) {
                 emptyState.classList.remove('hidden');
+                if (emptyTitle) emptyTitle.textContent = normalizedSearchQuery ? 'ไม่พบรุ่นเคสที่ตรงกับคำค้น' : 'ไม่พบข้อมูลเคสในโซนนี้';
+                if (emptyDescription) emptyDescription.textContent = normalizedSearchQuery ? 'ลองเปลี่ยนคำค้นหรือใช้คำสั้นลง' : 'กรุณาเลือกโซนอื่น หรือเพิ่มเคสใหม่ผ่านโหมด Admin';
             } else {
                 emptyState.classList.add('hidden');
             }
+            const searchResultCount = document.getElementById('caseSearchResultCount');
+            if (searchResultCount) searchResultCount.textContent = normalizedSearchQuery ? 'พบ ' + totalVisibleCount + ' รุ่น' : 'พิมพ์ชื่อรุ่นเพื่อค้นหา';
 
             lucide.createIcons();
         }
@@ -3049,6 +3179,102 @@
         <button type="button" class="zone-quick-link" data-zone="ZONE ITX" aria-label="เลือก ZONE ITX"><span class="zone-quick-dot"></span>ITX</button>
     </div>
 </nav>
+<button id="caseSearchToggle" type="button" aria-expanded="false" aria-controls="caseSearchPanel" aria-label="เปิดค้นหาเคส" aria-hidden="true" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+    <span>ค้นหาเคส</span>
+</button>
+<div id="caseSearchPanel" role="search" aria-label="ค้นหารุ่นเคส" aria-hidden="true">
+    <label for="caseSearchInput" class="block mb-2 text-xs font-bold text-slate-700">ค้นหารุ่นเคส</label>
+    <div class="case-search-input-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+        <input id="caseSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="เช่น HYTE Y70 หรือ IHC 102" aria-label="พิมพ์ชื่อรุ่นเคสที่ต้องการค้นหา">
+        <button id="caseSearchClear" type="button" aria-label="ล้างคำค้น"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+    </div>
+    <div class="mt-2 flex items-center justify-between gap-3">
+        <span id="caseSearchResultCount" aria-live="polite">พิมพ์ชื่อรุ่นเพื่อค้นหา</span>
+        <button id="caseSearchClose" type="button">ปิด</button>
+    </div>
+</div>
+<script>
+(() => {
+    const button = document.getElementById('caseSearchToggle');
+    const panel = document.getElementById('caseSearchPanel');
+    const input = document.getElementById('caseSearchInput');
+    const clearButton = document.getElementById('caseSearchClear');
+    const closeButton = document.getElementById('caseSearchClose');
+    if (!button || !panel || !input || !clearButton || !closeButton) return;
+
+    const setOpen = open => {
+        panel.classList.toggle('is-open', open);
+        panel.setAttribute('aria-hidden', String(!open));
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? 'ปิดแผงค้นหาเคส' : 'เปิดค้นหาเคส');
+        if (open) requestAnimationFrame(() => input.focus({ preventScroll: true }));
+    };
+    const clearQuery = () => {
+        if (!input.value && !caseSearchQuery) return;
+        input.value = '';
+        caseSearchQuery = '';
+        if (typeof renderCases === 'function') renderCases();
+    };
+
+    button.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
+    input.addEventListener('input', () => {
+        caseSearchQuery = input.value.trim();
+        if (typeof renderCases === 'function') renderCases();
+    });
+    clearButton.addEventListener('click', () => {
+        clearQuery();
+        input.focus({ preventScroll: true });
+    });
+    closeButton.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && panel.classList.contains('is-open')) {
+            setOpen(false);
+            if (button.classList.contains('is-visible')) button.focus();
+        }
+    });
+
+    const zoneToggle = document.getElementById('zoneQuickToggle');
+    const zoneList = document.getElementById('zoneQuickList');
+    if (zoneToggle) zoneToggle.addEventListener('click', () => setOpen(false));
+    if (zoneList) zoneList.addEventListener('click', () => setOpen(false));
+
+    const backToTop = document.getElementById('backToTopBtn');
+    const syncVerticalPosition = () => {
+        const above = !!(backToTop && backToTop.classList.contains('above-floating-bar'));
+        button.classList.toggle('above-floating-bar', above);
+        panel.classList.toggle('above-floating-bar', above);
+    };
+    if (backToTop && window.MutationObserver) {
+        new MutationObserver(syncVerticalPosition).observe(backToTop, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    let framePending = false;
+    const updateVisibility = () => {
+        if (framePending) return;
+        framePending = true;
+        requestAnimationFrame(() => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            const atPageTop = scrollTop <= 8;
+            const visible = !atPageTop;
+            button.classList.toggle('is-visible', visible);
+            button.setAttribute('aria-hidden', String(!visible));
+            button.tabIndex = visible ? 0 : -1;
+            if (atPageTop && (panel.classList.contains('is-open') || caseSearchQuery)) {
+                setOpen(false);
+                clearQuery();
+            }
+            framePending = false;
+        });
+    };
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility, { passive: true });
+    window.addEventListener('pageshow', updateVisibility);
+    syncVerticalPosition();
+    updateVisibility();
+})();
+</script>
 <script>
 (() => {
     const menu = document.getElementById('zoneQuickMenu');
@@ -3098,7 +3324,7 @@
             const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
             // Keep the zone filter visible but close its list when the page returns to the top.
             const atPageTop = scrollTop <= 8;
-            const visible = scrollTop > 160 || activeZoneFilter !== 'ALL';
+            const visible = scrollTop > 8 || activeZoneFilter !== 'ALL';
             menu.classList.toggle('is-visible', visible);
             menu.setAttribute('aria-hidden', String(!visible));
             if (atPageTop) setOpen(false);
