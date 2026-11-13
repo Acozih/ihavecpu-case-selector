@@ -1779,8 +1779,44 @@
         #caseSearchClear { display: flex; width: 34px; height: 34px; min-height: 34px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; }
         #caseSearchClear svg { width: 16px; height: 16px; }
         #caseSearchResultCount { min-height: 18px; color: #777c86; font: 500 11px/1.4 system-ui, sans-serif; }
+        #scrollToBottomBtn {
+            position: fixed;
+            right: 78px;
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            z-index: 60;
+            display: flex;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.20);
+            border-radius: 17px;
+            background: linear-gradient(145deg, #34363c 0%, #202125 100%);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(22,24,29,0.20);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(10px) scale(0.94);
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease, bottom 180ms ease;
+            cursor: pointer;
+        }
+        #scrollToBottomBtn.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        #scrollToBottomBtn:hover { background: linear-gradient(145deg, #454852 0%, #2b2d34 100%); }
+        #scrollToBottomBtn:active { transform: translateY(1px) scale(0.94); }
+        #scrollToBottomBtn:focus-visible { outline: 3px solid rgba(107,114,128,0.42); outline-offset: 3px; }
+        #scrollToBottomBtn.above-floating-bar { bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+        @media (max-width: 640px) {
+            #scrollToBottomBtn { right: 68px; width: 46px; height: 46px; border-radius: 15px; }
+            #scrollToBottomBtn.above-floating-bar { bottom: calc(154px + env(safe-area-inset-bottom, 0px)); }
+        }
         @media (prefers-reduced-motion: reduce) {
-            #caseSearchToggle, #caseSearchPanel { transition: none !important; }
+            #caseSearchToggle, #caseSearchPanel, #scrollToBottomBtn { transition: none !important; }
         }
 </style>
 </head>
@@ -1896,6 +1932,12 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m18 15-6-6-6 6"></path>
             <path d="M12 9v11"></path>
+        </svg>
+    </button>
+    <button id="scrollToBottomBtn" type="button" aria-label="เลื่อนไปด้านล่างสุด" title="เลื่อนไปล่างสุด" aria-hidden="true" tabindex="-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+            <path d="M12 4v11"></path>
         </svg>
     </button>
 
@@ -3139,22 +3181,45 @@
         }
 
         const backToTopButton = document.getElementById('backToTopBtn');
+        const scrollToBottomButton = document.getElementById('scrollToBottomBtn');
         function syncBackToTopButton() {
-            if (!backToTopButton) return;
-            backToTopButton.classList.toggle('is-visible', window.scrollY > 320);
-            backToTopButton.classList.toggle('above-floating-bar', selectedCaseIds.length > 0);
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+            const documentHeight = Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0);
+            const showTopButton = scrollTop > 320;
+            const showBottomButton = showTopButton && scrollTop + window.innerHeight < documentHeight - 100;
+            const aboveFloatingBar = selectedCaseIds.length > 0;
+            if (backToTopButton) {
+                backToTopButton.classList.toggle('is-visible', showTopButton);
+                backToTopButton.classList.toggle('above-floating-bar', aboveFloatingBar);
+                backToTopButton.setAttribute('aria-hidden', String(!showTopButton));
+                backToTopButton.tabIndex = showTopButton ? 0 : -1;
+            }
+            if (scrollToBottomButton) {
+                scrollToBottomButton.classList.toggle('is-visible', showBottomButton);
+                scrollToBottomButton.classList.toggle('above-floating-bar', aboveFloatingBar);
+                scrollToBottomButton.setAttribute('aria-hidden', String(!showBottomButton));
+                scrollToBottomButton.tabIndex = showBottomButton ? 0 : -1;
+            }
         }
-        if (backToTopButton) {
-            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        if (backToTopButton || scrollToBottomButton) {
+            if (backToTopButton) backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            if (scrollToBottomButton) scrollToBottomButton.addEventListener('click', () => {
+                const documentHeight = Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0);
+                window.scrollTo({ top: documentHeight, behavior: 'smooth' });
+            });
             let backToTopScrollQueued = false;
-            window.addEventListener('scroll', () => {
+            const scheduleScrollButtonSync = () => {
                 if (backToTopScrollQueued) return;
                 backToTopScrollQueued = true;
                 requestAnimationFrame(() => {
                     syncBackToTopButton();
                     backToTopScrollQueued = false;
                 });
-            }, { passive: true });
+            };
+            window.addEventListener('scroll', scheduleScrollButtonSync, { passive: true });
+            window.addEventListener('resize', scheduleScrollButtonSync, { passive: true });
+            window.addEventListener('pageshow', syncBackToTopButton);
+            syncBackToTopButton();
         }
 
         // Initialize App
